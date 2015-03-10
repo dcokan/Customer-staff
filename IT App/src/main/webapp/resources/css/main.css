@@ -1,0 +1,11 @@
+.topBarWithDetails {
+	padding-left: 100px;
+	padding-top: 10px;
+	display: block;
+}
+
+span.topBarWithDetails {
+	font-size: 18px;
+	color: green;
+	font-style: italic;
+}
