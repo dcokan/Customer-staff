@@ -24,7 +24,7 @@
 	</plugins>
 </build>
   <properties>
-	<spring.version>3.0.5.RELEASE</spring.version>
+        <spring.version>3.2.3.RELEASE</spring.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -35,17 +35,17 @@
 			<artifactId>aspectjrt</artifactId>
 			<version>1.5.4</version>
 		</dependency>
-	
-	    <dependency>
-			<groupId>org.swinglabs</groupId>
-			<artifactId>swingx</artifactId>
-			<version>1.6.1</version>
-		</dependency>
 		<dependency>
-			<groupId>org.swinglabs</groupId>
-			<artifactId>swingx-ws</artifactId>
-			<version>1.0</version>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0.3</version>
 		</dependency>
+<dependency>
+	<groupId>org.hibernate.javax.persistence</groupId>
+	<artifactId>hibernate-jpa-2.1-api</artifactId>
+	<version>1.0.0.Final</version>
+</dependency>
+
 
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
@@ -77,12 +77,6 @@
             <artifactId>persistence-api</artifactId>
             <version>1.0</version>
         </dependency>
-
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.6</version>
-        </dependency>
         
         <dependency>
 			<groupId>org.hibernate</groupId>
@@ -105,17 +99,26 @@
         <artifactId>javax.servlet-api</artifactId>
         <version>3.0.1</version>
     </dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>3.1.2.RELEASE</version>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>3.1.2.RELEASE</version>
+        </dependency>
+		<dependency> 
+		     <groupId>org.springframework</groupId> 
+		     <artifactId>spring-aspects</artifactId> 
+		     <version>3.1.2.RELEASE</version> 
 		</dependency>
- 
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>3.1.2.RELEASE</version>
-		</dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>3.1.2.RELEASE</version>
+        </dependency>
+	      <dependency>
+	         <groupId>org.springframework</groupId>
+	         <artifactId>spring-web</artifactId>
+	         <version>3.1.2.RELEASE</version>      
+	      </dependency>
 		<dependency>
 			<groupId>org.glassfish.web</groupId>
 			<artifactId>el-impl</artifactId>
@@ -129,5 +132,10 @@
 	    <name>java.net m2 repo</name>
 	    <url>http://download.java.net/maven/2</url>
 	  </repository>
-	</repositories>
+	  
+    <repository>
+      <id>codelds</id>
+      <url>https://code.lds.org/nexus/content/groups/main-repo</url>
+    </repository>
+  </repositories>
 </project>
