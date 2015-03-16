@@ -1,9 +1,12 @@
 package pwr.itApp.customerStaff.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.joda.time.DateTime;
@@ -47,6 +50,10 @@ public class User {
 	
 	@Column(name = "CREATOR_ID")
 	private Integer creatorId;
+
+    @OneToOne(cascade=CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+	private Restaurant restaurant;
 
 	public int getId() {
 		return id;
@@ -133,6 +140,18 @@ public class User {
 	}
 
 	public void setCreatorId(int creatorId) {
+		this.creatorId = creatorId;
+	}
+
+	public Restaurant getRestaurant() {
+		return restaurant;
+	}
+
+	public void setRestaurant(Restaurant restaurant) {
+		this.restaurant = restaurant;
+	}
+
+	public void setCreatorId(Integer creatorId) {
 		this.creatorId = creatorId;
 	}
 }
