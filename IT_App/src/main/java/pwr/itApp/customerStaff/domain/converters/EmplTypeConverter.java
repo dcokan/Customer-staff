@@ -4,6 +4,7 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 import pwr.itApp.customerStaff.domain.enums.EmplType;
+import pwr.itApp.customerStaff.domain.enums.EnumsUtils;
 
 @Converter
 public class EmplTypeConverter implements AttributeConverter<EmplType, String>{
@@ -15,13 +16,7 @@ public class EmplTypeConverter implements AttributeConverter<EmplType, String>{
 
 	@Override
 	public EmplType convertToEntityAttribute(String desc) {
-		for (EmplType type: EmplType.values()) {
-			if (type.getId().equals(desc)) {
-				return type;
-			}
-		}
-		
-		return null;
+		return EnumsUtils.fromString(EmplType.values(), desc);
 	}
 
 

@@ -24,4 +24,14 @@ public enum EmplType implements EnumWithId{
 	public String getNameKey() {
 		return nameKey;
 	}
+	
+	public static EmplType fromString(String code) {
+		for (EmplType type: EmplType.values()) {
+			if (type.getId().equals(code)) {
+				return type;
+			}
+		}
+		
+		return null;
+	}
 }
