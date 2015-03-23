@@ -11,4 +11,10 @@ public class UserDAO extends GenericDAO<User> {
 		return em.find(User.class, id);
 	}
 
+	public User findUserByLogin(String login) {
+		return em.createNamedQuery("User.findByLogin", User.class)
+			.setParameter("login", login)
+			.getSingleResult();
+	}
+
 }

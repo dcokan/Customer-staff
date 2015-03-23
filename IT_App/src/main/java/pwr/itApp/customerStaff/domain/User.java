@@ -5,6 +5,8 @@ import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -18,6 +20,12 @@ import pwr.itApp.customerStaff.domain.enums.EmplType;
 
 @Entity
 @Table(name = "USERS")
+@NamedQueries(
+	@NamedQuery(name="User.findByLogin",
+			query = "SELECT u FROM User u WHERE "
+				+ "u.login = :login AND "
+				+ "u.deleted = false")
+)
 public class User {
 
 	@Id
