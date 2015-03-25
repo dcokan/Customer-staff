@@ -1,20 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"   
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      >
- 
-    <h:head>
-		<link href="/resources/css/main.css" rel="stylesheet" type="text/css" />
-    </h:head>
+      xmlns:p="http://primefaces.org/ui">
 
-	<h:body>
-		<div class="page">
-			<ui:insert name="content">
-				Simple default content of empty site
-			</ui:insert>
-		</div>
-	</h:body>
+<h:head>
+    <link href="/resources/css/main.css" rel="stylesheet" type="text/css"/>
+</h:head>
+
+<h:body>
+    <div class="page">
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="100">
+                <ui:insert name="north-content">
+                </ui:insert>
+            </p:layoutUnit>
+            <p:layoutUnit position="south" size="50">
+                <ui:insert name="south-content">
+                    <h:outputText value="FOOTER."/>
+                </ui:insert>
+            </p:layoutUnit>
+            <p:layoutUnit position="west" size="100">
+                <ui:insert name="west-content">
+                    Simple default content of empty site
+                </ui:insert>
+            </p:layoutUnit>
+            <p:layoutUnit position="east" size="600">
+                <ui:insert name="east-content">
+                    Simple default content of empty site
+                </ui:insert>
+            </p:layoutUnit>
+            <p:layoutUnit position="center">
+                <ui:insert name="center-content">
+                    Simple default content of empty site
+                </ui:insert>
+            </p:layoutUnit>
+        </p:layout>
+    </div>
+</h:body>
 </html>

@@ -1,13 +1,75 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:h="http://java.sun.com/jsf/html" xmlns:c="http://java.sun.com/jsp/jstl/core">
- 
- 	<ui:composition template="/WEB-INF/templates/main_site.xhtml">
-	<ui:define name="content" >
-		<h:panelGroup class="topBarWithDetails" >
-			<h:outputText id="testId" value="#{mainPage.testMessage}"/>
-		</h:panelGroup>
- 	</ui:define>
- 	</ui:composition>
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/WEB-INF/templates/main_site.xhtml">
+
+    <ui:define name="north-content">
+        <div class="ui-grid">
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-6">
+                    <h:outputText value="BANNER."/>
+                </div>
+                <div class="ui-grid-col-6"></div>
+                <div class="ui-grid-col-6">
+                    <h:form>
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputText value="Login: "/>
+                            <p:inputText/>
+                            <h:outputText value="Password: "/>
+                            <p:password id="nonFeedback"/>
+                        </h:panelGrid>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+
+    <ui:define name="east-content">
+        <p:fieldset legend="Restaurant 1" toggleable="true" toggleSpeed="500">
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:graphicImage name="images/tmp1.jpg"/>
+                <h:outputText value="Restaurant 1 description"></h:outputText>
+            </h:panelGrid>
+        </p:fieldset>
+        <p:fieldset legend="Restaurant 2" toggleable="true" toggleSpeed="500">
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:graphicImage name="images/tmp2.jpg"/>
+                <h:outputText value="Restaurant 2 description"></h:outputText>
+            </h:panelGrid>
+        </p:fieldset>
+
+    </ui:define>
+</ui:composition>
 </html>
+
+        <!--<p:layout fullPage="true">
+                    <p:layoutUnit position="north" size="100">
+                        <h:outputText value="BANNER."/>
+                    </p:layoutUnit>
+                    <p:layoutUnit position="south" size="50">
+                        <h:outputText value="FOOTER."/>
+                    </p:layoutUnit>
+                    <p:layoutUnit position="west" size="100">
+                    </p:layoutUnit>
+                    <p:layoutUnit position="east" size="600">
+                        <p:fieldset legend="Restaurant 1" toggleable="true" toggleSpeed="500">
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <p:graphicImage name="images/tmp1.jpg"/>
+                                <h:outputText value="Restaurant 1 description"></h:outputText>
+                            </h:panelGrid>
+                        </p:fieldset>
+                        <p:fieldset legend="Restaurant 2" toggleable="true" toggleSpeed="500">
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <p:graphicImage name="images/tmp2.jpg"/>
+                                <h:outputText value="Restaurant 2 description"></h:outputText>
+                            </h:panelGrid>
+                        </p:fieldset>
+                    </p:layoutUnit>
+                    <p:layoutUnit position="center">
+                        <h:outputText value="Center Content"/>
+
+                    </p:layoutUnit>
+                </p:layout>-->
