@@ -18,7 +18,6 @@ import pwr.itApp.customerStaff.webapp.ResourceBundle;
 import pwr.itApp.customerStaff.webapp.login.Actor;
 
 @Service
-@ViewScoped
 public class ActorActions {
 
 	@Autowired
@@ -28,18 +27,18 @@ public class ActorActions {
 	@Autowired
 	private ResourceBundle rb;
 	
-	public String authenticate(String login, String pass) {
+	public boolean authenticate(String login, String pass) {
 		User userByLogin = userDAO.findUserByLogin(login);
 		
 		if (userByLogin == null) {
 			addMessage(rb.getString(USER_NOT_FOUND_MSG));
-			return null;
+			return false;
 		} else if (!validUserPassword(userByLogin, pass)) {
 			addMessage(rb.getString(WRONG_PASS_MSG));
-			return null;
+			return false;
 		} else {
 			actor.afterAuthentication(userByLogin);
-			return ApplicationURL.MAIN_PAGE;
+			return true;
 		}
 	}
 

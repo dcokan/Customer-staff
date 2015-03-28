@@ -9,3 +9,22 @@ span.topBarWithDetails {
 	color: green;
 	font-style: italic;
 }
+
+button.ui-button span.ui-button-text {
+	padding: .05em .4em;
+}
+
+.inlineTable {	
+  display: inline-table;
+}
+
+div.inlineBlockWithBtn {  
+	display: inline-block;
+  	position: absolute;
+  	padding-top: 5px;
+}
+
+div.inlineBlockWithBtn a {
+	display: block;
+  	padding-top: 5px;
+}

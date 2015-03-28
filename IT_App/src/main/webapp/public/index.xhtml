@@ -7,6 +7,7 @@
 <ui:composition template="/WEB-INF/templates/main_site.xhtml">
 
     <ui:define name="north-content">
+                    <h:form>
         <div class="ui-grid">
             <div class="ui-grid-row">
                 <div class="ui-grid-col-6">
@@ -14,17 +15,22 @@
                 </div>
                 <div class="ui-grid-col-6"></div>
                 <div class="ui-grid-col-6">
-                    <h:form>
-                        <h:panelGrid columns="2" cellpadding="5">
-                            <h:outputText value="Login: "/>
-                            <p:inputText/>
-                            <h:outputText value="Password: "/>
-                            <p:password id="nonFeedback"/>
+                        <h:panelGrid columns="2" cellpadding="5" styleClass="inlineTable">
+                            <h:outputText for="loginInput" value="Login: "/>
+                            <p:inputText id="loginInput" value="#{loginForm.loginUsername}"/>
+                            <h:outputText for="passwrodInput" value="Password:" />
+        					<p:password id="passwrodInput" value="#{loginForm.password}" required="true" />
                         </h:panelGrid>
-                    </h:form>
+                        
+						<h:panelGroup layout="block" styleClass="inlineBlockWithBtn">
+                        	<h:commandButton id="loginBtn" value="Login"  actionListener="#{mainPage.loginAction()}" />
+                        	<h:commandLink value="Create account"/>
+                        	<h:commandLink value="Password reminder"/>
+                        </h:panelGroup>
                 </div>
             </div>
         </div>
+</h:form>
     </ui:define>
 
     <ui:define name="east-content">

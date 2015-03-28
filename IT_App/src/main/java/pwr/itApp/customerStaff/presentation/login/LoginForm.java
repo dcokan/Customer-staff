@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class LoginForm {
 
 	private String loginUsername;
-	private String passHash;
+	private String password;
 	
 	public String getLoginUsername() {
 		return loginUsername;
@@ -17,11 +17,11 @@ public class LoginForm {
 	public void setLoginUsername(String loginUsername) {
 		this.loginUsername = loginUsername;
 	}
-	public String getPassHash() {
-		return passHash;
+	public String getPassword() {
+		return password;
 	}
-	public void setPassHash(String passHash) {
-		this.passHash = passHash;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 }

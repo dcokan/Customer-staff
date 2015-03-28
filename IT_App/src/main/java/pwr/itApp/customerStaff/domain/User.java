@@ -24,7 +24,7 @@ import pwr.itApp.customerStaff.domain.enums.EmplType;
 	@NamedQuery(name="User.findByLogin",
 			query = "SELECT u FROM User u WHERE "
 				+ "u.login = :login AND "
-				+ "u.deleted = false")
+				+ "u.deleted = 'N'")
 )
 public class User {
 
