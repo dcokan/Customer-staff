@@ -17,14 +17,14 @@
 	  		rendered="#{cc.attrs.showEmpty}">
 	        <h:panelGrid columns="2" cellpadding="5">
 	            <p:graphicImage name="#{cc.attrs.emptyImageURL}"/>
-	        	<h:outputText value="#{cc.attrs.emptyDescription}"/>
+	        	<h:outputText styleClass="word-prewrap" value="#{cc.attrs.emptyDescription}"/>
 	    	</h:panelGrid>
         </p:fieldset>
 	  	<ui:repeat var="item" value="#{cc.attrs.beanName.valueList}">
 			<p:fieldset legend="#{item.name}" toggleable="true" toggleSpeed="500">
 	            <h:panelGrid columns="2" cellpadding="5">
 	                <p:graphicImage name="#{item.imageURL}"/>
-	                <h:outputText value="#{item.description}"></h:outputText>
+	                <h:outputText styleClass="word-prewrap" value="#{item.description}"></h:outputText>
 	            </h:panelGrid>
         	</p:fieldset>
 	  	</ui:repeat>
