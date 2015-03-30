@@ -1,3 +1,7 @@
+body {
+	white-space: pre-wrap;
+}
+
 .topBarWithDetails {
 	padding-left: 100px;
 	padding-top: 10px;
@@ -27,4 +31,10 @@ div.inlineBlockWithBtn {
 div.inlineBlockWithBtn a {
 	display: block;
   	padding-top: 5px;
+}
+
+table.centralTable {
+	position: relative;
+  	top: 30px;
+  	left: 25%;
 }

@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:composite="http://java.sun.com/jsf/composite">
+ 
+	  <composite:interface>
+			<composite:attribute name="beanName" />
+			<composite:attribute name="showEmpty" />
+			<composite:attribute name="emptyName" />
+			<composite:attribute name="emptyImageURL" />
+			<composite:attribute name="emptyDescription" />
+	  </composite:interface>
+ 
+	  <composite:implementation>
+	  	<p:fieldset legend="#{cc.attrs.emptyName}" toggleable="false" 
+	  		rendered="#{cc.attrs.showEmpty}">
+	        <h:panelGrid columns="2" cellpadding="5">
+	            <p:graphicImage name="#{cc.attrs.emptyImageURL}"/>
+	        	<h:outputText value="#{cc.attrs.emptyDescription}"/>
+	    	</h:panelGrid>
+        </p:fieldset>
+	  	<ui:repeat var="item" value="#{cc.attrs.beanName.valueList}">
+			<p:fieldset legend="#{item.name}" toggleable="true" toggleSpeed="500">
+	            <h:panelGrid columns="2" cellpadding="5">
+	                <p:graphicImage name="#{item.imageURL}"/>
+	                <h:outputText value="#{item.description}"></h:outputText>
+	            </h:panelGrid>
+        	</p:fieldset>
+	  	</ui:repeat>
+	  </composite:implementation>
+</html>
