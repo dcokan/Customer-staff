@@ -1,0 +1,48 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:composite="http://java.sun.com/jsf/composite">
+ 
+	  <composite:interface>
+<!-- 			<composite:attribute name="beanName" /> -->
+<!-- 			<composite:attribute name="showEmpty" /> -->
+<!-- 			<composite:attribute name="emptyName" /> -->
+<!-- 			<composite:attribute name="emptyImageURL" /> -->
+<!-- 			<composite:attribute name="emptyDescription" /> -->
+	  </composite:interface>
+ 
+	  <composite:implementation>
+		<h:panelGrid columns="2" styleClass="centralTable">
+			<h:outputLabel value="First Name:" for="firstnameInput" />
+			<p:inputText id="firstnameInput" required="true" 
+				value="#{newUser.user.firstname}"/>
+			
+			<h:outputLabel value="Last Name:" for="lastnameInput" />
+			<p:inputText id="lastnameInput" required="true"
+				value="#{newUser.user.lastname}" />
+			
+			<h:outputLabel value="E-mail:" for="mailInput" />
+			<p:inputText id="mailInput" required="true"
+				value="#{newUser.user.mail}" />
+			
+			<h:outputLabel value="Telefon:" for="telInput" />
+			<p:inputText id="telInput" value="#{newUser.user.tel}" />
+				
+			<p:spacer height="30" />
+			<p:spacer height="30" />
+			
+			<h:outputLabel value="Login:" for="loginInput" />
+			<p:inputText id="loginInput" required="true" value="#{newUser.user.login}" />
+			<p:spacer height="20" />
+			<p:spacer height="20" />
+	        
+	        <h:outputLabel for="passInput" value="Password:" />
+	        <p:password id="passInput" value="#{newUser.user.pass}" match="passConfirmInput" label="Password" required="true" />
+	 
+	        <h:outputLabel for="passConfirmInput" value="Retype password:" />
+	        <p:password id="passConfirmInput" value="#{newUser.user.retypedPass}" label="Retyped password" required="true" />
+			
+		</h:panelGrid>
+	</composite:implementation>
+</html>
