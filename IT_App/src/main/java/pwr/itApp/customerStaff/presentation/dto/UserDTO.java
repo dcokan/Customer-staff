@@ -1,15 +1,20 @@
 package pwr.itApp.customerStaff.presentation.dto;
 
+import org.hibernate.annotations.common.util.impl.LoggerFactory;
+import org.jboss.logging.Logger;
+
 import pwr.itApp.customerStaff.domain.Restaurant;
 import pwr.itApp.customerStaff.domain.enums.EmplType;
 
 public class UserDTO {
-
+	Logger log = LoggerFactory.logger(getClass());
 	private String firstname;
 	private String lastname;
 	private String login;
 	private String mail;
 	private String tel;
+	private String pass;
+	private String retypedPass;
 	private boolean deleted;
 	private EmplType emplType;
 	private Integer creatorId;
@@ -47,6 +52,22 @@ public class UserDTO {
 		this.mail = mail;
 	}
 	
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+
+	public String getRetypedPass() {
+		return retypedPass;
+	}
+
+	public void setRetypedPass(String retypedPass) {
+		this.retypedPass = retypedPass;
+	}
+
 	public String getTel() {
 		return tel;
 	}

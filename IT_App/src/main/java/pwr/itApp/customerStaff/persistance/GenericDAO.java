@@ -9,6 +9,7 @@ public class GenericDAO<T>{
     public EntityManager getEntityManager() {
         return em;
     }
+    
     @PersistenceContext
     public void setEntityManager(EntityManager entityManager) {
         this.em = entityManager;

@@ -4,11 +4,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.joda.time.DateTime;
@@ -20,15 +22,20 @@ import pwr.itApp.customerStaff.domain.enums.EmplType;
 
 @Entity
 @Table(name = "USERS")
-@NamedQueries(
-	@NamedQuery(name="User.findByLogin",
+@SequenceGenerator(name = "UserSequence", sequenceName = "SEQ_USERS", allocationSize = 1)
+@NamedQueries({
+	@NamedQuery(name="User.findUnDeletedByLogin",
 			query = "SELECT u FROM User u WHERE "
 				+ "u.login = :login AND "
-				+ "u.deleted = 'N'")
-)
+				+ "u.deleted = 'N'"),
+	@NamedQuery(name="User.findAllByLogin",
+			query = "SELECT u FROM User u WHERE "
+				+ "u.login = :login")
+})
 public class User {
 
 	@Id
+	@GeneratedValue(generator = "UserSequence")
 	private int id;
 	
 	@Column

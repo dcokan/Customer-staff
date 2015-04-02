@@ -38,3 +38,8 @@ table.centralTable {
   	top: 30px;
   	left: 25%;
 }
+
+input.newAccount {
+  position: relative;
+  top: 30px;
+}

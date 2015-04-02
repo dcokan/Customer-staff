@@ -4,17 +4,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+	  xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
     <link href="/resources/css/main.css" rel="stylesheet" type="text/css"/>
 </h:head>
 
 <h:body>
+<h:form>
     <div class="page">
         <p:layout fullPage="true">
             <p:layoutUnit position="north" size="100">
                 <ui:insert name="north-content">
+	                <p:tabView >
+	                	<p:tab title="Users"/>
+	                	<p:tab title="Products"/>
+					</p:tabView>
+
                 </ui:insert>
             </p:layoutUnit>
             <p:layoutUnit position="south" size="50">
@@ -39,5 +46,6 @@
             </p:layoutUnit>
         </p:layout>
     </div>
+    </h:form>
 </h:body>
 </html>

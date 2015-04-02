@@ -45,7 +45,7 @@ public class ActorActions {
 	private boolean validUserPassword(User userByLogin, String pass) {
 		byte[] passByte = userByLogin.getPassHash().getBytes();
 		byte[] passToCheckByte = pass.getBytes();
-		String md5UserPass = DigestUtils.md5DigestAsHex(passByte);
+		String md5UserPass = 	DigestUtils.md5DigestAsHex(passByte);
 		String md5ToCheckPass = DigestUtils.md5DigestAsHex(passToCheckByte);	
 		
 		return md5ToCheckPass.equals(md5UserPass);

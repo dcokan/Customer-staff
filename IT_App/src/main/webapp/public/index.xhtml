@@ -7,7 +7,6 @@
 <ui:composition template="/WEB-INF/templates/main_site.xhtml">
 
     <ui:define name="north-content">
-                    <h:form>
         <div class="ui-grid">
             <div class="ui-grid-row">
                 <div class="ui-grid-col-6">
@@ -30,11 +29,11 @@
                 </div>
             </div>
         </div>
-</h:form>
+<!-- </h:form> -->
     </ui:define>
 
     <ui:define name="east-content">
-    	<custom:elemntsList beanName="#{mainPage}" showEmpty="false" emptyName="New Restaurant"
+    	<custom:elemntsList beanName="#{mainPage}" showEmpty="true" emptyName="New Restaurant"
     		emptyImageURL="images/tmp1.jpg" emptyDescription="Create and define new restaurant"/>
 <!--         <p:fieldset legend="Restaurant 1" toggleable="true" toggleSpeed="500"> -->
 <!--             <h:panelGrid columns="2" cellpadding="5"> -->

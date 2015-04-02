@@ -1,6 +1,10 @@
 package pwr.itApp.customerStaff.persistance;
 
+
+import javax.persistence.NoResultException;
+
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import pwr.itApp.customerStaff.domain.User;
 
@@ -12,9 +16,29 @@ public class UserDAO extends GenericDAO<User> {
 	}
 
 	public User findUserByLogin(String login) {
-		return em.createNamedQuery("User.findByLogin", User.class)
-			.setParameter("login", login)
-			.getSingleResult();
+		return findUserByLogin(login, false);
+	}
+	
+	public User findUserByLogin(String login, boolean showDeleted) {
+		try {
+			if (showDeleted) {
+				return em.createNamedQuery("User.findAllByLogin", User.class)
+						.setParameter("login", login)
+						.getSingleResult();
+			} else {
+				return em.createNamedQuery("User.findUnDeletedByLogin", User.class)
+						.setParameter("login", login)
+						.getSingleResult();
+			}
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
+
+	@Transactional
+	public void persistNewEntity(User user) {
+		em.persist(user);
+//		em.flush();
 	}
 
 }

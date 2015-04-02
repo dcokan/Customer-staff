@@ -8,8 +8,6 @@ import javax.faces.bean.ViewScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import pwr.itApp.customerStaff.domain.User;
-import pwr.itApp.customerStaff.persistance.UserDAO;
 import pwr.itApp.customerStaff.presentation.components.ElementsList;
 import pwr.itApp.customerStaff.presentation.dto.RestaurantDTO;
 import pwr.itApp.customerStaff.presentation.login.LoginForm;
@@ -26,24 +24,15 @@ public class MainPageBean implements ElementsList<RestaurantDTO> {
 	@Autowired
 	private ActorActions actorActions;
 	
-	@Autowired
-	private UserDAO userDAO;
-	
 	public String loginAction() {
 		if (actorActions.authenticate(loginForm.getLoginUsername(), 
 				loginForm.getPassword())) {
-			return ApplicationURL.MAIN_PAGE;
+			return ApplicationURL.REGISTER;
 		} else {
 			return ApplicationURL.MAIN_PAGE;
 		}
 	}
 	
-	public String getTest() {
-		User usr = userDAO.find(1);
-		
-		return usr.getLogin();
-	}
-
 	@Override
 	public List<RestaurantDTO> getValueList() {
 		// TODO Auto-generated method stub
