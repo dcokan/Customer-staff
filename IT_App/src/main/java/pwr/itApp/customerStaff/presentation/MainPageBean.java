@@ -2,7 +2,8 @@ package pwr.itApp.customerStaff.presentation;
 
 import java.util.ArrayList;
 import java.util.List;
-
+	
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,10 @@ import pwr.itApp.customerStaff.presentation.dto.RestaurantDTO;
 import pwr.itApp.customerStaff.presentation.login.LoginForm;
 import pwr.itApp.customerStaff.service.ActorActions;
 import pwr.itApp.customerStaff.webapp.ApplicationURL;
+import pwr.itApp.customerStaff.webapp.login.Actor;
 
 @Component("mainPage")
-@ViewScoped
+@SessionScoped
 public class MainPageBean implements ElementsList<RestaurantDTO> {
 	
 	@Autowired
@@ -23,6 +25,13 @@ public class MainPageBean implements ElementsList<RestaurantDTO> {
 	
 	@Autowired
 	private ActorActions actorActions;
+	
+	@Autowired
+	private Actor actor;
+	
+	public boolean isUserLogged() {
+		return actor.getUser() != null;
+	}
 	
 	public String loginAction() {
 		if (actorActions.authenticate(loginForm.getLoginUsername(), 

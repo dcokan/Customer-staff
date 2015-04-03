@@ -5,15 +5,26 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:custom="http://java.sun.com/jsf/composite/components">
-
-<!-- <ui:composition template="/WEB-INF/templates/main_site.xhtml"> -->
-	<ui:define name="center-content">
-		<h:outputText>Tralalalal</h:outputText>
-	</ui:define>
+<h:form>
+	<custom:newUserForm />
 	
-<!--     <ui:define name="east-content"> -->
-<!--     	<custom:elemntsList beanName="#{userRegister}" showEmpty="true" emptyName="New Restaurant" -->
-<!--     		emptyImageURL="images/tmp1.jpg" emptyDescription="Create and define new restaurant"/> -->
-<!--     </ui:define> -->
-<!-- </ui:composition> -->
+	<h:panelGrid columns="1" styleClass="centralTable">
+		<p:spacer width="10" />
+		<p:panel id="basic" header="Provide activation credentials" >
+	        <h:panelGrid columns="2">
+	        	<h:outputLabel for="activationEmailInput" value="E-mail:"/>
+	        	<p:inputText id="activationEmailInput" value="#{userRegister.activationMail}" />
+	        	
+				<h:outputLabel for="activationInput" value="Activation code:"/>
+	            <p:inputText id="activationInput" value="#{userRegister.activationCode}" />
+	        </h:panelGrid>
+    	</p:panel>
+		<p:row>
+			<h:commandButton id="confirmManagerBtn" value="Create account" styleClass="newAccount"  
+					action="#{userRegister.onNewManagerAccountRegistry}">
+					<f:ajax execute="@form" update="@form" render="@form"/>
+			</h:commandButton>
+		</p:row>
+	</h:panelGrid>
+</h:form>
 </html>

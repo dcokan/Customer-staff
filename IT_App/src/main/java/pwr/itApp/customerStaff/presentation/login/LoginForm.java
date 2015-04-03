@@ -4,7 +4,7 @@ import javax.faces.bean.RequestScoped;
 
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("loginForm")
 @RequestScoped
 public class LoginForm {
 

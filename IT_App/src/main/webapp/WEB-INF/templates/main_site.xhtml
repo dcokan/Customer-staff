@@ -12,12 +12,36 @@
 </h:head>
 
 <h:body>
-<h:form>
+<!-- <h:form> -->
     <div class="page">
         <p:layout fullPage="true">
             <p:layoutUnit position="north" size="100">
                 <ui:insert name="north-content">
-	                <p:tabView >
+                	<h:form rendered="#{not mainPage.userLogged}">
+                	<div class="ui-grid">
+			            <div class="ui-grid-row">
+			                <div class="ui-grid-col-6">
+			                    <h:outputText value="BANNER."/>
+			                </div>
+			                <div class="ui-grid-col-6"></div>
+			                <div class="ui-grid-col-6">
+			                        <h:panelGrid columns="2" cellpadding="5" styleClass="inlineTable">
+			                            <h:outputText for="loginInput" value="Login: "/>
+			                            <p:inputText id="loginInput" value="#{loginForm.loginUsername}"/>
+			                            <h:outputText for="passwrodInput" value="Password:" />
+			        					<p:password id="passwrodInput" value="#{loginForm.password}" required="true" />
+			                        </h:panelGrid>
+			
+									<h:panelGroup layout="block" styleClass="inlineBlockWithBtn">
+			                        	<h:commandButton id="loginBtn" value="Login"  actionListener="#{mainPage.loginAction()}" />
+			                        	<h:commandLink value="Create account"/>
+			                        	<h:commandLink value="Password reminder"/>
+			                        </h:panelGroup>
+			                </div>
+			            </div>
+			        </div>
+			        </h:form>
+	                <p:tabView rendered="#{mainPage.userLogged}">
 	                	<p:tab title="Users"/>
 	                	<p:tab title="Products"/>
 					</p:tabView>
@@ -46,6 +70,6 @@
             </p:layoutUnit>
         </p:layout>
     </div>
-    </h:form>
+<!--     </h:form> -->
 </h:body>
 </html>

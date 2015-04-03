@@ -5,42 +5,17 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:custom="http://java.sun.com/jsf/composite/components">
-
+<h:form>
 	<p:messages id="messages" showDetail="true" autoUpdate="true" />
-	<h:panelGrid columns="2" styleClass="centralTable">
-			
-			<h:outputLabel value="First Name:" for="firstnameInput" />
-			<p:inputText id="firstnameInput" required="true" 
-				value="#{userRegister.user.firstname}"/>
-			
-			<h:outputLabel value="Last Name:" for="lastnameInput" />
-			<p:inputText id="lastnameInput" required="true"
-				value="#{userRegister.user.lastname}" />
-			
-			<h:outputLabel value="E-mail:" for="mailInput" />
-			<p:inputText id="mailInput" required="true"
-				value="#{userRegister.user.mail}" />
-			
-			<h:outputLabel value="Telefon:" for="telInput" />
-			<p:inputText id="telInput" value="#{userRegister.user.tel}" />
-				
-			<p:spacer height="30" />
-			<p:spacer height="30" />
-			
-			<h:outputLabel value="Login:" for="loginInput" />
-			<p:inputText id="loginInput" required="true" value="#{userRegister.user.login}" />
-			<p:spacer height="20" />
-			<p:spacer height="20" />
-	        
-	        <h:outputLabel for="passInput" value="Password:" />
-	        <p:password id="passInput" value="#{userRegister.user.pass}" match="passConfirmInput" label="Password" required="true" />
-	 
-	        <h:outputLabel for="passConfirmInput" value="Retype password:" />
-	        <p:password id="passConfirmInput" value="#{userRegister.user.retypedPass}" label="Retyped password" required="true" />
-			
-			<p:row>
-				<h:commandButton id="confirmBtn" value="Create account" styleClass="newAccount"  
-						action="#{userRegister.onNewAccountRegistry}"/>
-			</p:row>
-		</h:panelGrid>
+	<custom:newUserForm/>
+	
+	<h:panelGrid columns="1" styleClass="centralTable">
+		<p:row>
+			<h:commandButton id="confirmBtn" value="Create account" styleClass="newAccount"   
+					action="#{userRegister.onNewAccountRegistry}">
+				<f:ajax render="@form" />
+			</h:commandButton>
+		</p:row>
+	</h:panelGrid>
+	</h:form>
 </html>
