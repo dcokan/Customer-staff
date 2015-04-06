@@ -43,3 +43,13 @@ input.newAccount {
   position: relative;
   top: 30px;
 }
+
+.adminMenu {
+	margin-left: 100px;
+  	margin-top: 20px;
+  	margin-right: auto;
+}
+
+.adminMenu div.ui-button {	
+  margin-right: 50px;
+}

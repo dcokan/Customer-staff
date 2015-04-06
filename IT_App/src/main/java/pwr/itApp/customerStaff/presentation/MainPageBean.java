@@ -1,16 +1,18 @@
 package pwr.itApp.customerStaff.presentation;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-	
+
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import pwr.itApp.customerStaff.presentation.components.ElementsList;
 import pwr.itApp.customerStaff.presentation.dto.RestaurantDTO;
+import pwr.itApp.customerStaff.presentation.enums.TabMenu;
 import pwr.itApp.customerStaff.presentation.login.LoginForm;
 import pwr.itApp.customerStaff.service.ActorActions;
 import pwr.itApp.customerStaff.webapp.ApplicationURL;
@@ -28,6 +30,8 @@ public class MainPageBean implements ElementsList<RestaurantDTO> {
 	
 	@Autowired
 	private Actor actor;
+
+	private TabMenu selectedTab;
 	
 	public boolean isUserLogged() {
 		return actor.getUser() != null;
@@ -49,4 +53,25 @@ public class MainPageBean implements ElementsList<RestaurantDTO> {
 		restaurants.add(new RestaurantDTO());
 		return restaurants;
 	}
+
+	public TabMenu[] getAdminTabs() {
+		return TabMenu.values();
+	}
+
+	public void onAdminTabChange() {
+	    try {
+			FacesContext.getCurrentInstance().getExternalContext().redirect(selectedTab.getEntryURL());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public TabMenu getSelectedTab() {
+		return selectedTab;
+	}
+
+	public void setSelectedTab(TabMenu selectedTab) {
+		this.selectedTab = selectedTab;
+	}
+	
 }

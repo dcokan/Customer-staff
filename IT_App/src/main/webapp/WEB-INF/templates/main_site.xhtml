@@ -41,11 +41,13 @@
 			            </div>
 			        </div>
 			        </h:form>
-	                <p:tabView rendered="#{mainPage.userLogged}">
-	                	<p:tab title="Users"/>
-	                	<p:tab title="Products"/>
-					</p:tabView>
-
+			        <h:form rendered="#{mainPage.userLogged}" styleClass="adminMenu">
+		                <p:selectOneButton value="#{mainPage.selectedTab}" >
+							<f:selectItems value="#{mainPage.adminTabs}" var="var" itemLabel="#{var.nameKey}" 
+								itemValue="#{var}"/>
+							<p:ajax listener="#{mainPage.onAdminTabChange}"/>
+				        </p:selectOneButton>
+			        </h:form>
                 </ui:insert>
             </p:layoutUnit>
             <p:layoutUnit position="south" size="50">
