@@ -2,6 +2,7 @@ package pwr.itApp.customerStaff.presentation.login;
 
 import javax.faces.bean.RequestScoped;
 
+import org.jboss.logging.MDC;
 import org.springframework.stereotype.Component;
 
 @Component("loginForm")

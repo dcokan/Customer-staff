@@ -21,8 +21,8 @@
     	</p:panel>
 		<p:row>
 			<h:commandButton id="confirmManagerBtn" value="Create account" styleClass="newAccount"  
-					action="#{userRegister.onNewManagerAccountRegistry}">
-					<f:ajax execute="@form" update="@form" render="@form"/>
+					action="#{userRegister.onNewManagerAccountRegistry}" type="submit">
+					<f:ajax execute="@form" render="@form"/>
 			</h:commandButton>
 		</p:row>
 	</h:panelGrid>

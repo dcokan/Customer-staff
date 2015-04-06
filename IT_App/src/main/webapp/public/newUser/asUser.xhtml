@@ -12,8 +12,8 @@
 	<h:panelGrid columns="1" styleClass="centralTable">
 		<p:row>
 			<h:commandButton id="confirmBtn" value="Create account" styleClass="newAccount"   
-					action="#{userRegister.onNewAccountRegistry}">
-				<f:ajax render="@form" />
+					action="#{userRegister.onNewAccountRegistry}" type="submit">
+				<f:ajax execute="@form" render="@form" />
 			</h:commandButton>
 		</p:row>
 	</h:panelGrid>
