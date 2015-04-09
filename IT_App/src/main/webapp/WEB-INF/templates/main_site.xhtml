@@ -47,6 +47,8 @@
 								itemValue="#{var}"/>
 							<p:ajax listener="#{mainPage.onAdminTabChange}"/>
 				        </p:selectOneButton>
+				        <h:outputText id="loggedUsrInfo" value="#{mainPage.loggedUserName}"/>
+				        <h:commandLink id="logoutLnk" value="(logout)" action="#{mainPage.onLogout}" />
 			        </h:form>
                 </ui:insert>
             </p:layoutUnit>

@@ -8,9 +8,12 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import org.hibernate.annotations.common.util.impl.LoggerFactory;
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import pwr.itApp.customerStaff.domain.User;
 import pwr.itApp.customerStaff.presentation.components.ElementsList;
 import pwr.itApp.customerStaff.presentation.dto.RestaurantDTO;
 import pwr.itApp.customerStaff.presentation.enums.TabMenu;
@@ -22,6 +25,7 @@ import pwr.itApp.customerStaff.webapp.login.Actor;
 @Component("mainPage")
 @SessionScoped
 public class MainPageBean implements ElementsList<RestaurantDTO> {
+	private static Logger log = LoggerFactory.logger(MainPageBean.class);
 	
 	@Autowired
 	private LoginForm loginForm;
@@ -63,7 +67,18 @@ public class MainPageBean implements ElementsList<RestaurantDTO> {
 	public TabMenu[] getAdminTabs() {
 		return TabMenu.values();
 	}
+	
+	public String getLoggedUserName() {
+		User usr = actor.getUser();
+		return usr.getLastname() + ", " + usr.getFirstname();
+	}
 
+	public void onLogout() {
+		log.info("User (" + actor.getUser().getId() + ") logs out" );
+		actor.logoutUser();
+		redirect(ApplicationURL.MAIN_PAGE + ApplicationURL.RELOAD);
+	}
+	
 	private void redirect(String URL) {
 	    try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect(URL);

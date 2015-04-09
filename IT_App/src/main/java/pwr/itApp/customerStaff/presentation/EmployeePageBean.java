@@ -20,12 +20,18 @@ public class EmployeePageBean implements ElementsList<UserDTO> {
 	@Autowired
 	private UserService userService;
 	
+	private List<UserDTO> userList;
+	
 	@Autowired
 	private Actor actor;
 	
 	@Override
 	public List<UserDTO> getValueList() {
-		return userService.getUserEmployeers(actor.getUser());
+		if (userList == null) {
+			userList = userService.getUserEmployeers(actor.getUser());
+		}
+		
+		return userList;
 	}
 
 	@Override

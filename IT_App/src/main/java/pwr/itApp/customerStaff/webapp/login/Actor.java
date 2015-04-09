@@ -22,6 +22,10 @@ public class Actor {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+	public void logoutUser() {
+		setUser(null);
+	}
 	
 	
 }
