@@ -1,6 +1,8 @@
 package pwr.itApp.customerStaff.persistance;
 
 
+import java.util.List;
+
 import javax.persistence.NoResultException;
 
 import org.springframework.stereotype.Repository;
@@ -38,7 +40,18 @@ public class UserDAO extends GenericDAO<User> {
 	@Transactional
 	public void persistNewEntity(User user) {
 		em.persist(user);
-//		em.flush();
+	}
+
+	public List<User> findAllCreatedByUser(int userId) {
+		return em.createNamedQuery("User.findAllCreatedByUser", User.class)
+				.setParameter("creatorId", userId)
+				.getResultList();
+	}
+
+	public List<User> findAllWorkingInRestaurant(int restaurantId) {
+		return em.createNamedQuery("User.findAllWorkingInRestaurant", User.class)
+				.setParameter("restaurantId", restaurantId)
+				.getResultList();
 	}
 
 }

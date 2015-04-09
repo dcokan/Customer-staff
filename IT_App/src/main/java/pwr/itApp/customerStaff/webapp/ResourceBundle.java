@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * RB will be created
  *
  */
-@Service
+@Service("mockRB")
 @SessionScoped
 @Deprecated
 public class ResourceBundle {

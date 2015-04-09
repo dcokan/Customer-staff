@@ -38,39 +38,35 @@ public class UserRegisterBean {
 	private String activationCode;
 	private String activationMail;
 	
-	public String onNewAccountRegistry() {
-		log.info("New user button clicked");
-		
-		return createNewUser(EmplType.CUSTOMER, userForm.getUser()) ? 
-				ApplicationURL.MAIN_PAGE + ApplicationURL.RELOAD : null;
-	}
 
-	private boolean createNewUser(EmplType emplType, UserDTO user) {
+	private String createNewUser(UserDTO user) {
 		if (!validData(user)) {
-			return false;
+			return null;
 		}
-		prepareAccountForUser(emplType, user);
+		prepareAccountForUser(user);
 		userService.createUser(user);
-		return true;
+		return ApplicationURL.EMPLOYEERS + ApplicationURL.RELOAD;
+	}
+	
+	private String createNewUser(EmplType emplType, UserDTO user) {
+		user.setEmplType(emplType);
+		return createNewUser(user);
 	}
 
-	private void prepareAccountForUser(EmplType emplType, UserDTO user) {
-		user.setEmplType(emplType);
-		switch (emplType) {
+	private void prepareAccountForUser( UserDTO user) {
+		switch (user.getEmplType()) {
 		case BARMAN:
-			break;
 		case COOKER:
+		case WAITER:
+			user.setRestaurant(actor.getUser().getRestaurant());
+			user.setCreatorId(actor.getUser().getId());
 			break;
 		case CUSTOMER:
 			//TODO: uncomment this after actor will be correctly involved in the app
-			//user.setCreatorId(actor.getUser().getId());
+			user.setCreatorId(actor.getUser().getId());
 			break;
 		case OWNER:
 			//TODO: We should somehow validate ActivationCode
-			break;
-		case WAITER:
-			break;
-		default:
 			break;
 		
 		}
@@ -78,8 +74,20 @@ public class UserRegisterBean {
 
 	public String onNewManagerAccountRegistry() {
 		log.info("New manager user button clicked");
-		return createNewUser(EmplType.OWNER, userForm.getUser()) ? 
-				ApplicationURL.MAIN_PAGE + ApplicationURL.RELOAD : null;
+		return createNewUser(EmplType.OWNER, userForm.getUser());
+	}
+
+	public String onNewAccountRegistry() {
+		log.info("New user button clicked");
+		
+		return createNewUser(EmplType.CUSTOMER, userForm.getUser());
+	}
+	
+	public String onNewEmployeeCreated() {
+		log.info("New employee button clicked");
+		
+		return createNewUser(userForm.getUser());
+				
 	}
 	
 	private boolean validData(UserDTO user) {

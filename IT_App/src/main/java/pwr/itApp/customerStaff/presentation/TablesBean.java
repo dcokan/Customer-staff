@@ -1,14 +1,13 @@
 package pwr.itApp.customerStaff.presentation;
 
 
-import org.springframework.stereotype.Component;
-import pwr.itApp.customerStaff.presentation.components.ElementsList;
-import pwr.itApp.customerStaff.presentation.dto.OrderDTO;
-import pwr.itApp.customerStaff.presentation.dto.RestaurantDTO;
-import pwr.itApp.customerStaff.presentation.dto.TableDTO;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import pwr.itApp.customerStaff.presentation.components.ElementsList;
+import pwr.itApp.customerStaff.presentation.dto.TableDTO;
 
 @Component("tablesBean")
 public class TablesBean implements ElementsList<TableDTO> {
@@ -20,4 +19,9 @@ public class TablesBean implements ElementsList<TableDTO> {
         tables.add(new TableDTO());
         return tables;
     }
+
+	@Override
+	public String onNewItemButton() {
+		throw new UnsupportedOperationException("New entry is not acceptable");
+	}
 }

@@ -15,13 +15,15 @@
 	  <composite:implementation>
 	  	<p:fieldset legend="#{cc.attrs.emptyName}" toggleable="false" 
 	  		rendered="#{cc.attrs.showEmpty}">
-	        <h:panelGrid columns="2" cellpadding="5">
+	        <h:panelGrid columns="3" cellpadding="5">
 	            <p:graphicImage name="#{cc.attrs.emptyImageURL}" width="100" hight="100"/>
 	        	<h:outputText styleClass="word-prewrap" value="#{cc.attrs.emptyDescription}"/>
+	        	<h:commandButton id="newItemBtn" action="#{cc.attrs.beanName.onNewItemButton}"
+	        		value="+" styleClass="newItemBtn"/>
 	    	</h:panelGrid>
         </p:fieldset>
 	  	<ui:repeat var="item" value="#{cc.attrs.beanName.valueList}">
-			<p:fieldset legend="#{item.name}" toggleable="true" toggleSpeed="500">
+			<p:fieldset legend="#{item.name}" toggleable="true" toggleSpeed="500" collapsed="true">
 	            <h:panelGrid columns="2" cellpadding="5">
 	                <p:graphicImage name="#{item.imageURL}" width="100" hight="100"/>
 	                <h:outputText styleClass="word-prewrap" value="#{item.description}"></h:outputText>

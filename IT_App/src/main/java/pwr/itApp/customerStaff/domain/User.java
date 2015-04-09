@@ -30,7 +30,13 @@ import pwr.itApp.customerStaff.domain.enums.EmplType;
 				+ "u.deleted = 'N'"),
 	@NamedQuery(name="User.findAllByLogin",
 			query = "SELECT u FROM User u WHERE "
-				+ "u.login = :login")
+				+ "u.login = :login"),
+	@NamedQuery(name="User.findAllCreatedByUser",
+			query = "SELECT u FROM User u WHERE "
+				+ "u.creatorId = :creatorId"),
+	@NamedQuery(name="User.findAllWorkingInRestaurant",
+			query = "SELECT u FROM User u WHERE "
+				+ "u.restaurant.id = :restaurantId")
 })
 public class User {
 

@@ -3,39 +3,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html" xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:custom="http://java.sun.com/jsf/composite/components">
 
 <ui:composition template="/WEB-INF/templates/main_site.xhtml">
 	<ui:define name="center-content">
-		<h:panelGrid columns="2" styleClass="centralTable">
-			<h:outputLabel value="First Name:" for="firstnameInput" />
-			<p:inputText id="firstnameInput" required="true" 
-				value="#{userManager.user.firstname}"/>
+		<h:form>
+			<p:messages id="messages" showDetail="true" autoUpdate="true" />
+			<custom:newUserForm/>
 			
-			<h:outputLabel value="Last Name:" for="lastnameInput" />
-			<p:inputText id="lastnameInput" required="true"
-				value="#{userManager.user.lastname}" />
-			
-			<h:outputLabel value="E-mail:" for="mailInput" />
-			<p:inputText id="mailInput" required="true"
-				value="#{userManager.user.mail}" />
-			
-			<h:outputLabel value="Telefon:" for="telInput" />
-			<p:inputText id="telInput" required="true"
-				value="#{userManager.user.tel}" />
-			
-			<h:outputLabel value="Choose employee type:" for="emplTypeInput"/>
-			<p:selectOneMenu id="emplTypeInput" value="#{userManager.user.emplType}"
-				required="true">
-				<f:selectItem label="" value="#{null}"/>
-				<f:selectItems value="#{userManager.emplTypes}" var="var" itemLabel="#{var.nameKey}"/>
-			</p:selectOneMenu>
-			<p:spacer height="30" />
-			<p:spacer height="30" />
-			<h:outputLabel value="Login:" for="loginInput" />
-			<p:inputText id="loginInput" required="true" value="#{userManager.user.login}" />
-			
-		</h:panelGrid>
+			<h:panelGrid columns="1" styleClass="centralTable">
+				<p:row>
+					<h:commandButton id="confirmBtn" value="Create account" styleClass="newAccount"   
+							action="#{userRegister.onNewEmployeeCreated}" type="submit">
+						<f:ajax execute="@form" render="@form" />
+					</h:commandButton>
+				</p:row>
+			</h:panelGrid>
+		</h:form>
 	</ui:define>
 </ui:composition>
 </html>

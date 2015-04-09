@@ -28,6 +28,13 @@
 			
 			<h:outputLabel value="Telefon:" for="telInput" />
 			<p:inputText id="telInput" value="#{newUser.user.tel}" />
+			
+			<h:outputLabel value="Choose employee type:" for="emplTypeInput"/>
+			<p:selectOneMenu id="emplTypeInput" value="#{newUser.user.emplType}"
+				required="true">
+				<f:selectItem label="" value="#{null}"/>
+				<f:selectItems value="#{newUser.emplTypes}" var="var" itemLabel="#{var.nameKey}"/>
+			</p:selectOneMenu>
 				
 			<p:spacer height="30" />
 			<p:spacer height="30" />

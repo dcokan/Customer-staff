@@ -53,3 +53,10 @@ input.newAccount {
 .adminMenu div.ui-button {	
   margin-right: 50px;
 }
+
+input.newItemBtn {
+	width: 50px;
+  	height: 50px;
+  	margin-left: 20px;
+  	font-size: 40px;
+}

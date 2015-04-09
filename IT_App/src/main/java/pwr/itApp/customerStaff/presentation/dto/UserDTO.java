@@ -1,12 +1,19 @@
 package pwr.itApp.customerStaff.presentation.dto;
 
+import java.text.MessageFormat;
+
+import javax.faces.context.FacesContext;
+
 import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.jboss.logging.Logger;
 
 import pwr.itApp.customerStaff.domain.Restaurant;
 import pwr.itApp.customerStaff.domain.enums.EmplType;
+import pwr.itApp.customerStaff.presentation.components.ElementComponent;
+import pwr.itApp.customerStaff.webapp.ResourceBundle;
+import pwr.itApp.customerStaff.webapp.TextResourceKeys;
 
-public class UserDTO {
+public class UserDTO implements ElementComponent{
 	Logger log = LoggerFactory.logger(getClass());
 	private String firstname;
 	private String lastname;
@@ -19,6 +26,37 @@ public class UserDTO {
 	private EmplType emplType;
 	private Integer creatorId;
 	private Restaurant restaurant;
+	private String description;
+	
+
+	@Override
+	public String getName() {
+		return firstname + " " + lastname;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@Override
+	public String getDescription() {
+		return description;
+//		FacesContext facesContext = FacesContext.getCurrentInstance();
+//		ResourceBundle mockRB = (ResourceBundle) facesContext.getApplication()
+//				.getVariableResolver().resolveVariable(facesContext, "mockRB");
+//		//TODO: Key should be like:
+//		// {0} is a {1}
+//		// for example:
+//		// Dawid Cokan is a waiter
+//		return MessageFormat.format(mockRB.getString(TextResourceKeys.EMPLOYEE_DESC), 
+//				 getName(), mockRB.getString(emplType.getNameKey()));
+	}
+
+	@Override
+	public String getImageURL() {
+		// TODO Auto-generated method stub
+		return "images/employee.png";
+	}
 	
 	public String getFirstname() {
 		return firstname;
@@ -106,4 +144,5 @@ public class UserDTO {
 	public void setRestaurant(Restaurant restaurant) {
 		this.restaurant = restaurant;
 	}
+
 }

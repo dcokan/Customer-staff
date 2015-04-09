@@ -15,4 +15,5 @@ public class TextResourceKeys {
 	public static final String USER_NOT_FOUND_MSG="error.userNotFound";
 	public static final String WRONG_PASS_MSG="error.wrongPassword";
 	public static final String DUPLICATED_LOGIN = "error.duplicatedUnique";
+	public static final String EMPLOYEE_DESC = "employeeDesc";
 }

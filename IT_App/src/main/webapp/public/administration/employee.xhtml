@@ -6,10 +6,11 @@
 
 <ui:composition template="/WEB-INF/templates/main_site.xhtml">
 
-
-    <ui:define name="east-content">
-    	<custom:elemntsList beanName="#{mainPage}" showEmpty="true" emptyName="New Restaurant"
-    		emptyImageURL="images/tmp1.jpg" emptyDescription="Create and define new restaurant"/>
-    </ui:define>
+	<ui:define name="east-content">
+		<h:form>
+	    	<custom:elemntsList beanName="#{employeePage}" showEmpty="true" emptyName="New User"
+	    		emptyImageURL="images/employee.png" emptyDescription="Create and define new user"/>
+    	</h:form>
+	</ui:define>
 </ui:composition>
 </html>

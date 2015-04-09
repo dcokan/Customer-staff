@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
@@ -33,16 +34,21 @@ public class MainPageBean implements ElementsList<RestaurantDTO> {
 
 	private TabMenu selectedTab;
 	
+	@PostConstruct
+	public void init() {
+		selectedTab = TabMenu.EMPLOYEERS;
+	}
+	
 	public boolean isUserLogged() {
 		return actor.getUser() != null;
 	}
 	
-	public String loginAction() {
+	public void loginAction() {
 		if (actorActions.authenticate(loginForm.getLoginUsername(), 
 				loginForm.getPassword())) {
-			return ApplicationURL.REGISTER;
+			redirect(ApplicationURL.EMPLOYEERS+ApplicationURL.RELOAD);
 		} else {
-			return ApplicationURL.MAIN_PAGE;
+			return;
 		}
 	}
 	
@@ -58,12 +64,16 @@ public class MainPageBean implements ElementsList<RestaurantDTO> {
 		return TabMenu.values();
 	}
 
-	public void onAdminTabChange() {
+	private void redirect(String URL) {
 	    try {
-			FacesContext.getCurrentInstance().getExternalContext().redirect(selectedTab.getEntryURL());
+			FacesContext.getCurrentInstance().getExternalContext().redirect(URL);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void onAdminTabChange() {
+		redirect(selectedTab.getEntryURL());
 	}
 
 	public TabMenu getSelectedTab() {
@@ -72,6 +82,11 @@ public class MainPageBean implements ElementsList<RestaurantDTO> {
 
 	public void setSelectedTab(TabMenu selectedTab) {
 		this.selectedTab = selectedTab;
+	}
+
+	@Override
+	public String onNewItemButton() {
+		throw new UnsupportedOperationException("New entry is not acceptable");
 	}
 	
 }
