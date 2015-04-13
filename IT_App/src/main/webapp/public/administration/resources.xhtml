@@ -2,14 +2,29 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html" xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:p="http://primefaces.org/ui" xmlns:custom="http://java.sun.com/jsf/composite/components">
+      xmlns:p="http://primefaces.org/ui" xmlns:custom="http://java.sun.com/jsf/composite/components"
+      xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition template="/WEB-INF/templates/main_site.xhtml">
 
 
     <ui:define name="east-content">
-    	<custom:elemntsList beanName="#{mainPage}" showEmpty="true" emptyName="New Restaurant"
-    		emptyImageURL="images/tmp1.jpg" emptyDescription="Create and define new restaurant"/>
+	<h:form>
+    	<p:tabView >
+    		<p:tab title="Liquid resources">
+		    	<custom:elemntsList valueList="#{resourcesBean.liquidResources}" showEmpty="true" emptyName="New Resource"
+		    		emptyImageURL="images/tmp1.jpg" emptyDescription="Create and define new restaurant"/>
+    		</p:tab>
+    		<p:tab title="Gram">
+		    	<custom:elemntsList valueList="#{resourcesBean.gramResources}" showEmpty="true" emptyName="New Resource"
+		    		emptyImageURL="images/tmp1.jpg" emptyDescription="Create and define new restaurant"/>
+    		</p:tab>
+    		<p:tab title="By piece">
+		    	<custom:elemntsList valueList="#{resourcesBean.pieceResources}" showEmpty="true" emptyName="New Resource"
+		    		emptyImageURL="images/tmp1.jpg" emptyDescription="Create and define new restaurant"/>
+    		</p:tab>
+    	</p:tabView>
+	</h:form>
     </ui:define>
 </ui:composition>
 </html>

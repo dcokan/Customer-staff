@@ -27,7 +27,7 @@ public class UserFactory extends AbstractFactoryDTO<User, UserDTO>{
 		userDTO.setCreatorId(entity.getCreatorId());
 		userDTO.setEmplType(entity.getEmplType());
 		userDTO.setMail(entity.getMail());
-		userDTO.setRestaurant(entity.getRestaurant());
+//		userDTO.setRestaurant(entity.getRestaurants().g);
 		userDTO.setTel(entity.getTel());
 		
 		userDTO.setDescription(MessageFormat.format(rb.getString(TextResourceKeys.EMPLOYEE_DESC), 
@@ -46,7 +46,7 @@ public class UserFactory extends AbstractFactoryDTO<User, UserDTO>{
 		user.setLogin(userData.getLogin());
 		user.setMail(userData.getMail());
 		user.setPassHash(DigestUtils.md5DigestAsHex(userData.getPass().getBytes()));
-		user.setRestaurant(userData.getRestaurant());
+//		user.setRestaurant(userData.getRestaurant());
 		user.setTel(userData.getTel());
 		
 		return user;

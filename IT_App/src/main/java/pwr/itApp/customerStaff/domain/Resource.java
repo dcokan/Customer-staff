@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import pwr.itApp.customerStaff.domain.converters.MeasureUnitConverter;
@@ -11,6 +13,10 @@ import pwr.itApp.customerStaff.domain.enums.MeasureUnit;
 
 @Entity
 @Table(name = "RESOURCES")
+@NamedQueries(
+		@NamedQuery(name="Resource.findAllOfRest",
+				query = "SELECT r FROM Resource r WHERE "
+						+ "r.restaurantId = :restaurantId"))
 public class Resource {
 
 	@Id
@@ -25,6 +31,9 @@ public class Resource {
 	private double amount;
 	
 	private double price;
+	
+	@Column(name="RESTAURANT_ID")
+	private int restaurantId;
 
 	public int getId() {
 		return id;
@@ -64,5 +73,13 @@ public class Resource {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public int getRestaurantId() {
+		return restaurantId;
+	}
+
+	public void setRestaurantId(int restaurantId) {
+		this.restaurantId = restaurantId;
 	}
 }

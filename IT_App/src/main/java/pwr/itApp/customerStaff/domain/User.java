@@ -6,10 +6,10 @@ import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -73,7 +73,7 @@ public class User {
 	private Integer creatorId;
 
     @OneToOne(cascade=CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @JoinColumn(name="RESTAURANT_ID")
 	private Restaurant restaurant;
 
 	public int getId() {

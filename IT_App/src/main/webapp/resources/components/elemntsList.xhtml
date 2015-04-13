@@ -10,6 +10,7 @@
 			<composite:attribute name="emptyName" />
 			<composite:attribute name="emptyImageURL" />
 			<composite:attribute name="emptyDescription" />
+			<composite:attribute name="valueList" default="#{null}" />
 	  </composite:interface>
  
 	  <composite:implementation>
@@ -22,7 +23,17 @@
 	        		value="+" styleClass="newItemBtn"/>
 	    	</h:panelGrid>
         </p:fieldset>
-	  	<ui:repeat var="item" value="#{cc.attrs.beanName.valueList}">
+	  	<ui:repeat var="item" value="#{cc.attrs.valueList}"
+	  		rendered="#{not empty cc.attrs.valueList}">
+			<p:fieldset legend="#{item.name}" toggleable="true" toggleSpeed="500" collapsed="true">
+	            <h:panelGrid columns="2" cellpadding="5">
+	                <p:graphicImage name="#{item.imageURL}" width="100" hight="100"/>
+	                <h:outputText styleClass="word-prewrap" value="#{item.description}"></h:outputText>
+	            </h:panelGrid>
+        	</p:fieldset>
+	  	</ui:repeat>
+	  	<ui:repeat var="item" value="#{cc.attrs.beanName.valueList}"
+	  		rendered="#{empty cc.attrs.valueList}">
 			<p:fieldset legend="#{item.name}" toggleable="true" toggleSpeed="500" collapsed="true">
 	            <h:panelGrid columns="2" cellpadding="5">
 	                <p:graphicImage name="#{item.imageURL}" width="100" hight="100"/>

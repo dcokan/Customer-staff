@@ -3,6 +3,7 @@ package pwr.itApp.customerStaff.domain;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,8 +32,8 @@ public class Restaurant {
 	
 	private String mail;
 	
-//	@Column(name = "OWNER_ID")
-//	private Integer ownerId;
+	@Column(name = "OWNER_ID")
+	private Integer ownerId;
 	
 	@Convert(converter = YNBooleanConverter.class)
 	private boolean deleted;
@@ -101,13 +102,13 @@ public class Restaurant {
 		this.mail = mail;
 	}
 
-//	public Integer getOwnerId() {
-//		return ownerId;
-//	}
-//
-//	public void setOwnerId(Integer ownerId) {
-//		this.ownerId = ownerId;
-//	}
+	public Integer getOwnerId() {
+		return ownerId;
+	}
+
+	public void setOwnerId(Integer ownerId) {
+		this.ownerId = ownerId;
+	}
 
 	public boolean isDeleted() {
 		return deleted;

@@ -58,7 +58,7 @@ public class UserRegisterBean {
 		case BARMAN:
 		case COOKER:
 		case WAITER:
-			user.setRestaurant(actor.getUser().getRestaurant());
+//			user.setRestaurant(actor.getUser().getRestaurants());
 			user.setCreatorId(actor.getUser().getId());
 			break;
 		case CUSTOMER:

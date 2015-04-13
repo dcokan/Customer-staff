@@ -35,10 +35,10 @@ public class UserService {
 		List<User> allUsers = new ArrayList<User>();
 		List<User> createdByUser = userDAO.findAllCreatedByUser(user.getId());
 		List<User> workingInUserRestaurant = null;
-		if (user.getRestaurant() != null) {
-			workingInUserRestaurant = userDAO.findAllWorkingInRestaurant(user.getRestaurant().getId());
-			allUsers.addAll(workingInUserRestaurant);
-		}
+//		if (user.getRestaurant() != null) {
+//			workingInUserRestaurant = userDAO.findAllWorkingInRestaurant(user.getRestaurant().getId());
+//			allUsers.addAll(workingInUserRestaurant);
+//		}
 		
 		allUsers.addAll(createdByUser);
 		return userFactory.getDTOList(allUsers);
