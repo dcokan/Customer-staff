@@ -37,6 +37,8 @@ public class MainPageBean implements ElementsList<RestaurantDTO> {
 	private Actor actor;
 
 	private TabMenu selectedTab;
+
+	private RestaurantDTO selectedRestaurant;
 	
 	@PostConstruct
 	public void init() {
@@ -50,7 +52,7 @@ public class MainPageBean implements ElementsList<RestaurantDTO> {
 	public void loginAction() {
 		if (actorActions.authenticate(loginForm.getLoginUsername(), 
 				loginForm.getPassword())) {
-			redirect(ApplicationURL.EMPLOYEERS+ApplicationURL.RELOAD);
+			ApplicationURL.redirect(ApplicationURL.EMPLOYEERS+ApplicationURL.RELOAD);
 		} else {
 			return;
 		}
@@ -76,19 +78,11 @@ public class MainPageBean implements ElementsList<RestaurantDTO> {
 	public void onLogout() {
 		log.info("User (" + actor.getUser().getId() + ") logs out" );
 		actor.logoutUser();
-		redirect(ApplicationURL.MAIN_PAGE + ApplicationURL.RELOAD);
-	}
-	
-	private void redirect(String URL) {
-	    try {
-			FacesContext.getCurrentInstance().getExternalContext().redirect(URL);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ApplicationURL.redirect(ApplicationURL.MAIN_PAGE + ApplicationURL.RELOAD);
 	}
 	
 	public void onAdminTabChange() {
-		redirect(selectedTab.getEntryURL());
+		ApplicationURL.redirect(selectedTab.getEntryURL());
 	}
 
 	public TabMenu getSelectedTab() {
@@ -100,8 +94,13 @@ public class MainPageBean implements ElementsList<RestaurantDTO> {
 	}
 
 	@Override
-	public String onNewItemButton() {
+	public void onNewItemButton() {
 		throw new UnsupportedOperationException("New entry is not acceptable");
+	}
+
+	@Override
+	public void onDeailShowButton(RestaurantDTO restaurant) {
+		selectedRestaurant = restaurant;
 	}
 	
 }

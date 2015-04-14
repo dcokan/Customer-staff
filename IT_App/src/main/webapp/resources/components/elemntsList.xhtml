@@ -11,6 +11,8 @@
 			<composite:attribute name="emptyImageURL" />
 			<composite:attribute name="emptyDescription" />
 			<composite:attribute name="valueList" default="#{null}" />
+			<composite:attribute name="updateArea"/>
+			<composite:attribute name="updateAreaNewItem"/>
 	  </composite:interface>
  
 	  <composite:implementation>
@@ -20,24 +22,24 @@
 	            <p:graphicImage name="#{cc.attrs.emptyImageURL}" width="100" hight="100"/>
 	        	<h:outputText styleClass="word-prewrap" value="#{cc.attrs.emptyDescription}"/>
 	        	<h:commandButton id="newItemBtn" action="#{cc.attrs.beanName.onNewItemButton}"
-	        		value="+" styleClass="newItemBtn"/>
+	        		value="+" styleClass="newItemBtn" type="submit" rendered="#{not empty cc.attrs.updateAreaNewItem}">
+					<f:ajax execute="#{cc.attrs.updateAreaNewItem}" render="#{cc.attrs.updateAreaNewItem}" />
+				</h:commandButton>
+	        	<h:commandButton id="newItemBtnNonAjax" action="#{cc.attrs.beanName.onNewItemButton}"
+	        		value="+" styleClass="newItemBtn" type="submit"  rendered="#{empty cc.attrs.updateAreaNewItem}"/>
 	    	</h:panelGrid>
         </p:fieldset>
-	  	<ui:repeat var="item" value="#{cc.attrs.valueList}"
-	  		rendered="#{not empty cc.attrs.valueList}">
+	  	<ui:repeat var="item" value="#{not empty cc.attrs.valueList ? cc.attrs.valueList : cc.attrs.beanName.valueList}">
 			<p:fieldset legend="#{item.name}" toggleable="true" toggleSpeed="500" collapsed="true">
 	            <h:panelGrid columns="2" cellpadding="5">
 	                <p:graphicImage name="#{item.imageURL}" width="100" hight="100"/>
 	                <h:outputText styleClass="word-prewrap" value="#{item.description}"></h:outputText>
-	            </h:panelGrid>
-        	</p:fieldset>
-	  	</ui:repeat>
-	  	<ui:repeat var="item" value="#{cc.attrs.beanName.valueList}"
-	  		rendered="#{empty cc.attrs.valueList}">
-			<p:fieldset legend="#{item.name}" toggleable="true" toggleSpeed="500" collapsed="true">
-	            <h:panelGrid columns="2" cellpadding="5">
-	                <p:graphicImage name="#{item.imageURL}" width="100" hight="100"/>
-	                <h:outputText styleClass="word-prewrap" value="#{item.description}"></h:outputText>
+	                <h:panelGroup>
+		                <h:outputText styleClass="word-prewrap" value="#{item.description}"></h:outputText>
+		                <h:commandLink value="showDetails" action="#{cc.attrs.beanName.onDeailShowButton(item)}">
+		                	<p:ajax update="#{cc.attrs.updateArea}"/>
+		                </h:commandLink>
+	                </h:panelGroup>
 	            </h:panelGrid>
         	</p:fieldset>
 	  	</ui:repeat>

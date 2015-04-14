@@ -1,5 +1,6 @@
 .word-prewrap {
 	white-space: pre-wrap;
+	display: block;
 }
 
 .topBarWithDetails {
@@ -64,4 +65,10 @@ input.newItemBtn {
 .ui-widget-content a {
  	color: rgba(64, 94, 213, 0.75);
     font-style: italic;
+}
+
+label.centralLabel {
+	display: block;
+  	font-size: xx-large;
+  	text-align: center;
 }

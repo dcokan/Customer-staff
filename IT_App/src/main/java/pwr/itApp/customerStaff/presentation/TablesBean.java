@@ -4,12 +4,14 @@ package pwr.itApp.customerStaff.presentation;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
+
 import org.springframework.stereotype.Component;
 
 import pwr.itApp.customerStaff.presentation.components.ElementsList;
 import pwr.itApp.customerStaff.presentation.dto.TableDTO;
 
-@Component("tablesBean")
+@ManagedBean(name="tablesBean")
 public class TablesBean implements ElementsList<TableDTO> {
 
     @Override
@@ -21,7 +23,13 @@ public class TablesBean implements ElementsList<TableDTO> {
     }
 
 	@Override
-	public String onNewItemButton() {
+	public void onNewItemButton() {
 		throw new UnsupportedOperationException("New entry is not acceptable");
+	}
+
+	@Override
+	public void onDeailShowButton(TableDTO item) {
+		// TODO Auto-generated method stub
+		
 	}
 }

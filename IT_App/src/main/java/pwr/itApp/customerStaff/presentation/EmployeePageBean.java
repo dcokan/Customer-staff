@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.faces.bean.ViewScoped;
 
+import oracle.net.aso.s;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,13 +19,14 @@ import pwr.itApp.customerStaff.webapp.login.Actor;
 @ViewScoped
 public class EmployeePageBean implements ElementsList<UserDTO> {
 
+	private List<UserDTO> userList;
+	private UserDTO selectedUser;
+
 	@Autowired
 	private UserService userService;
-	
-	private List<UserDTO> userList;
-	
 	@Autowired
 	private Actor actor;
+
 	
 	@Override
 	public List<UserDTO> getValueList() {
@@ -35,8 +38,25 @@ public class EmployeePageBean implements ElementsList<UserDTO> {
 	}
 
 	@Override
-	public String onNewItemButton() {
-		return ApplicationURL.NEW_EMPLOYEE + ApplicationURL.RELOAD;
+	public void onNewItemButton() {
+		ApplicationURL.redirect(ApplicationURL.NEW_EMPLOYEE + ApplicationURL.RELOAD);
+	}
+
+	@Override
+	public void onDeailShowButton(UserDTO user) {
+		selectedUser = user;
+	}
+	
+	public boolean isUserSelected() {
+		return selectedUser != null;
+	}
+
+	public UserDTO getSelectedUser() {
+		return selectedUser;
+	}
+
+	public void setSelectedUser(UserDTO selectedUser) {
+		this.selectedUser = selectedUser;
 	}
 	
 	

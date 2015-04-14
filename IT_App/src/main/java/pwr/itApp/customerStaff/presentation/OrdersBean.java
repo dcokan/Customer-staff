@@ -3,6 +3,7 @@ package pwr.itApp.customerStaff.presentation;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import pwr.itApp.customerStaff.presentation.components.ElementsList;
 import pwr.itApp.customerStaff.presentation.dto.OrderDTO;
 import pwr.itApp.customerStaff.webapp.login.Actor;
 
-@Component("ordersBean")
+@ManagedBean(name="ordersBean")
 @ViewScoped
 public class OrdersBean implements ElementsList<OrderDTO> {
 
@@ -28,8 +29,14 @@ public class OrdersBean implements ElementsList<OrderDTO> {
     }
 
 	@Override
-	public String onNewItemButton() {
+	public void onNewItemButton() {
 		throw new UnsupportedOperationException("New entry is not acceptable");
+	}
+
+	@Override
+	public void onDeailShowButton(OrderDTO item) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

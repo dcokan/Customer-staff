@@ -6,6 +6,12 @@ import pwr.itApp.customerStaff.presentation.components.ElementComponent;
 public class ResourceDTO implements ElementComponent{
 	
 	private String name;
+	private double minimalAmount;
+	private double criticalAmount;
+	private double price;
+	private double amount;
+	private MeasureUnit measureUnit;
+	
 	
 	@Override
 	public String getName() {
@@ -51,12 +57,6 @@ public class ResourceDTO implements ElementComponent{
 		this.price = price;
 	}
 
-	private MeasureUnit measureUnit;
-	
-	private double amount;
-	
-	private double price;
-
 	public boolean isLiquid() {
 		return measureUnit.isLiquid();
 	}
@@ -67,5 +67,21 @@ public class ResourceDTO implements ElementComponent{
 
 	public boolean isPieceResource() {
 		return measureUnit.isPiece();
+	}
+
+	public double getMinimalAmount() {
+		return minimalAmount;
+	}
+
+	public void setMinimalAmount(double minimalAmount) {
+		this.minimalAmount = minimalAmount;
+	}
+
+	public double getCriticalAmount() {
+		return criticalAmount;
+	}
+
+	public void setCriticalAmount(double criticalAmount) {
+		this.criticalAmount = criticalAmount;
 	}
 }

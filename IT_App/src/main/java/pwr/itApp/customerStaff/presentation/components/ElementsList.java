@@ -5,5 +5,6 @@ import java.util.List;
 public interface ElementsList<T extends ElementComponent> {
 
 	public List<T> getValueList();
-	public String onNewItemButton();
+	public void onNewItemButton();
+	public void onDeailShowButton(T item);
 }

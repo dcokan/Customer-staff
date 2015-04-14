@@ -8,8 +8,12 @@
 
 
     <ui:define name="east-content">
-    	<custom:elemntsList beanName="#{mainPage}" showEmpty="true" emptyName="New Restaurant"
-    		emptyImageURL="images/tmp1.jpg" emptyDescription="Create and define new restaurant"/>
+    	<h:form>
+    	<custom:elemntsList beanName="#{mainPage}" showEmpty="true" emptyName="New Restaurant" 
+    		updateArea="@form" emptyImageURL="images/tmp1.jpg" 
+    		emptyDescription="Create and define new restaurant"/>
+    	</h:form>
     </ui:define>
+    
 </ui:composition>
 </html>

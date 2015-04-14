@@ -10,21 +10,36 @@
 
     <ui:define name="east-content">
 	<h:form>
-    	<p:tabView >
+    	<p:tabView activeIndex="#{resourcesBean.activeTabIndex}">
     		<p:tab title="Liquid resources">
 		    	<custom:elemntsList valueList="#{resourcesBean.liquidResources}" showEmpty="true" emptyName="New Resource"
-		    		emptyImageURL="images/tmp1.jpg" emptyDescription="Create and define new restaurant"/>
+		    		emptyImageURL="images/tmp1.jpg" emptyDescription="Create and define new restaurant"
+		    		beanName="#{resourcesBean}" updateAreaNewItem=":#{p:component('centerContent')}" updateArea=":#{p:component('centerContent')}"/>
     		</p:tab>
     		<p:tab title="Gram">
 		    	<custom:elemntsList valueList="#{resourcesBean.gramResources}" showEmpty="true" emptyName="New Resource"
-		    		emptyImageURL="images/tmp1.jpg" emptyDescription="Create and define new restaurant"/>
+		    		emptyImageURL="images/tmp1.jpg" emptyDescription="Create and define new restaurant"
+		    		beanName="#{resourcesBean}" updateAreaNewItem=":#{p:component('centerContent')}" updateArea=":#{p:component('centerContent')}"/>
     		</p:tab>
     		<p:tab title="By piece">
 		    	<custom:elemntsList valueList="#{resourcesBean.pieceResources}" showEmpty="true" emptyName="New Resource"
-		    		emptyImageURL="images/tmp1.jpg" emptyDescription="Create and define new restaurant"/>
+		    		emptyImageURL="images/tmp1.jpg" emptyDescription="Create and define new restaurant"
+		    		beanName="#{resourcesBean}" updateAreaNewItem=":#{p:component('centerContent')}" updateArea=":#{p:component('centerContent')}"/>
     		</p:tab>
     	</p:tabView>
 	</h:form>
+    </ui:define>
+    
+    <ui:define name="center-content">
+    	<h:form id="centerContent" >
+	    	<h:panelGroup id="resourceDetails" rendered="#{resourcesBean.resourceSelected}">
+	    		<ui:include src="/public/resources/detailsPanel.xhtml"/>
+	    	</h:panelGroup>
+	    	
+	    	<h:panelGroup id="newResourceBlk"  rendered="#{resourcesBean.newResourceAddMode}">
+	    		<ui:include src="/public/resources/newResource.xhtml"/>
+	    	</h:panelGroup>
+    	</h:form>
     </ui:define>
 </ui:composition>
 </html>
