@@ -17,12 +17,24 @@
         <p:tabView dynamic="true" cache="true">
             <p:tab title="Orders">
                 <custom:elemntsList beanName="#{ordersBean}" showEmpty="true" emptyName="New Order"
-                                    emptyImageURL="images/newOrder.png" emptyDescription="Create and define new order"/>
+                                    emptyImageURL="images/newOrder.png" emptyDescription="Create and define new order"
+                                    updateAreaNewItem=":#{p:component('centerContent')}"
+                                    updateArea=":#{p:component('centerContent')}"/>
             </p:tab>
             <p:tab title="Tables">
                 <custom:elemntsList beanName="#{tablesBean}" showEmpty="false"/>
             </p:tab>
         </p:tabView>
+    </ui:define>
+    <ui:define name="center-content">
+        <h:form id="centerContent" >
+            <h:panelGroup id="orderDetails" rendered="#{ordersBean.orderSelected}">
+                <ui:include src="/public/resources/detailsPanel.xhtml"/>
+            </h:panelGroup>
+            <h:panelGroup id="newOrder" rendered="#{ordersBean.newOrderAddMode}">
+                <ui:include src="/public/orders/newOrder.xhtml"/>
+            </h:panelGroup>
+        </h:form>
     </ui:define>
 </ui:composition>
 </body>

@@ -5,10 +5,13 @@ import pwr.itApp.customerStaff.presentation.components.ElementComponent;
 
 public class OrderDTO implements ElementComponent {
 
+    private String name;
+    private int tableNumber;
+
     @Override
     public String getName() {
         // TODO Auto-generated method stub
-        return "simple name";
+        return "simple order";
     }
 
     @Override
@@ -24,5 +27,17 @@ public class OrderDTO implements ElementComponent {
     public String getImageURL() {
         // TODO Auto-generated method stub
         return "images/order1.png";
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getTableNumber() {
+        return tableNumber;
+    }
+
+    public void setTableNumber(int tableNumber) {
+        this.tableNumber = tableNumber;
     }
 }

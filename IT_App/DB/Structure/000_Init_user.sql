@@ -5,8 +5,10 @@
  * and probably more :) ) rights. 
  * 
  * Execute it as following:
- * sqlplys SYSTEM/SYSTEM @000_Init_user.sql
- * 
+ * sqlplus SYSTEM/SYSTEM @000_Init_user.sql
+ * and next
+ *  sqlplus IT_APP_USER/IT_APP @001_TABLES.sql
+
  * **In case if You have different SYSTEM user password use it instead
  * ** You have to copy file into some directory and run above statement from that directory
  */
