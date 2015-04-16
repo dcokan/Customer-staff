@@ -1,22 +1,28 @@
 package pwr.itApp.customerStaff.presentation;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ViewScoped;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import pwr.itApp.customerStaff.domain.enums.MeasureUnit;
+import pwr.itApp.customerStaff.domain.enums.ResourceType;
 import pwr.itApp.customerStaff.presentation.components.ElementsList;
 import pwr.itApp.customerStaff.presentation.dto.ResourceDTO;
 import pwr.itApp.customerStaff.service.ResourcesService;
+import pwr.itApp.customerStaff.webapp.ApplicationURL;
 import pwr.itApp.customerStaff.webapp.login.Actor;
 
 @Component("resourcesBean")
-@ViewScoped
-public class ResourcesBean implements ElementsList<ResourceDTO>{
+@Scope("view")
+public class ResourcesBean implements ElementsList<ResourceDTO>, Serializable{
+
+	private static final long serialVersionUID = 7486937318441787833L;
 
 	@Autowired
 	private Actor actor;
@@ -24,6 +30,7 @@ public class ResourcesBean implements ElementsList<ResourceDTO>{
 	@Autowired
 	private ResourcesService resourcesService;
 	
+	private static final ResourceType RESOURCE_TABS[] = ResourceType.values();
 	private List<ResourceDTO> liquidResources;
 	private List<ResourceDTO> gramResources;
 	private List<ResourceDTO> pieceResources;
@@ -67,14 +74,25 @@ public class ResourcesBean implements ElementsList<ResourceDTO>{
 	public void onNewItemButton() {
 		newResourceAddMode = true;
 		selectedResource = null;
+		newResource = new ResourceDTO();
 	}
 	
 	public void onNewMinimalAmountConfirm() {
 		minimalAmountDialogShown = false;
 	}
 	
+	public void onTabChange() {
+		newResource.setResourceType(RESOURCE_TABS[activeTabIndex]);
+	}
+	
 	public void changeMinimalAmountDialogVisibility() {
 		minimalAmountDialogShown = !minimalAmountDialogShown;
+	}
+	
+	public void onNewResource() {
+		newResource.setRestaurantId(actor.getChosenRestaurantId());
+		resourcesService.createResource(newResource);
+		ApplicationURL.redirect(ApplicationURL.RESOURCES + ApplicationURL.RELOAD);
 	}
 	
 	private void initResources() {
@@ -162,8 +180,8 @@ public class ResourcesBean implements ElementsList<ResourceDTO>{
 		return minimalAmountDialogShown;
 	}
 	
-	public boolean canEditMinimalAmount() {
-		return !newResource.getMeasureUnit().isPiece();
+	public boolean isMinimalAmountEditable() {
+		return true;
 	}
 
 	public int getActiveTabIndex() {
@@ -180,5 +198,9 @@ public class ResourcesBean implements ElementsList<ResourceDTO>{
 
 	public void setNewResource(ResourceDTO newResource) {
 		this.newResource = newResource;
+	}
+	
+	public MeasureUnit[] getMeasureUnits() {
+		return MeasureUnit.values();
 	}
 }

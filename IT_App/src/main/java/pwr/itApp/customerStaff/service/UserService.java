@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.DigestUtils;
 
 import pwr.itApp.customerStaff.domain.User;
 import pwr.itApp.customerStaff.persistance.UserDAO;
@@ -22,7 +21,6 @@ public class UserService {
 	private UserFactory userFactory;
 	
 	public void createUser(UserDTO userData) {
-		
 		userDAO.persistNewEntity(userFactory.getEntity(userData));
 	}
 
@@ -35,10 +33,10 @@ public class UserService {
 		List<User> allUsers = new ArrayList<User>();
 		List<User> createdByUser = userDAO.findAllCreatedByUser(user.getId());
 		List<User> workingInUserRestaurant = null;
-//		if (user.getRestaurant() != null) {
-//			workingInUserRestaurant = userDAO.findAllWorkingInRestaurant(user.getRestaurant().getId());
-//			allUsers.addAll(workingInUserRestaurant);
-//		}
+		if (user.getRestaurant() != null) {
+			workingInUserRestaurant = userDAO.findAllWorkingInRestaurant(user.getRestaurant().getId());
+			allUsers.addAll(workingInUserRestaurant);
+		}
 		
 		allUsers.addAll(createdByUser);
 		return userFactory.getDTOList(allUsers);

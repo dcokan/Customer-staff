@@ -21,6 +21,10 @@ public class ResourcesService {
 	public List<ResourceDTO> getAllRestaurantResources(Integer chosenRestaurantId) {
 		return resourcesFactory.getDTOList(resourcesDAO.findAllResourcesInRestaurantById(chosenRestaurantId));
 	}
+	
+	public void createResource(ResourceDTO dto) {
+		resourcesDAO.persistNewEntry(resourcesFactory.getEntity(dto));
+	}
 
 	
 }

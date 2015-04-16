@@ -1,12 +1,14 @@
 package pwr.itApp.customerStaff.presentation;
 
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import pwr.itApp.customerStaff.domain.enums.EmplType;
@@ -19,8 +21,10 @@ import pwr.itApp.customerStaff.webapp.TextResourceKeys;
 import pwr.itApp.customerStaff.webapp.login.Actor;
 
 @Component("userRegister")
-@ViewScoped	
-public class UserRegisterBean {
+@Scope("view")
+public class UserRegisterBean implements Serializable {
+	private static final long serialVersionUID = -3945140317631571930L;
+
 	private static Logger log = LoggerFactory.logger(UserRegisterBean.class);
 	
 	@Autowired

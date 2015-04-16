@@ -1,16 +1,19 @@
 package pwr.itApp.customerStaff.presentation.dto;
 
 import pwr.itApp.customerStaff.domain.enums.MeasureUnit;
+import pwr.itApp.customerStaff.domain.enums.ResourceType;
 import pwr.itApp.customerStaff.presentation.components.ElementComponent;
 
 public class ResourceDTO implements ElementComponent{
 	
 	private String name;
-	private double minimalAmount;
-	private double criticalAmount;
-	private double price;
-	private double amount;
+	private Double minimalAmount;
+	private Double criticalAmount;
+	private Double price;
+	private Double amount;
 	private MeasureUnit measureUnit;
+	private ResourceType resourceType;
+	private int restaurantId;
 	
 	
 	@Override
@@ -41,19 +44,19 @@ public class ResourceDTO implements ElementComponent{
 		this.measureUnit = measureUnit;
 	}
 
-	public double getAmount() {
+	public Double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(double amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
 
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
@@ -69,19 +72,35 @@ public class ResourceDTO implements ElementComponent{
 		return measureUnit.isPiece();
 	}
 
-	public double getMinimalAmount() {
+	public Double getMinimalAmount() {
 		return minimalAmount;
 	}
 
-	public void setMinimalAmount(double minimalAmount) {
+	public void setMinimalAmount(Double minimalAmount) {
 		this.minimalAmount = minimalAmount;
 	}
 
-	public double getCriticalAmount() {
+	public Double getCriticalAmount() {
 		return criticalAmount;
 	}
 
-	public void setCriticalAmount(double criticalAmount) {
+	public void setCriticalAmount(Double criticalAmount) {
 		this.criticalAmount = criticalAmount;
+	}
+
+	public ResourceType getResourceType() {
+		return resourceType;
+	}
+
+	public void setResourceType(ResourceType resourceType) {
+		this.resourceType = resourceType;
+	}
+
+	public int getRestaurantId() {
+		return restaurantId;
+	}
+
+	public void setRestaurantId(int restaurantId) {
+		this.restaurantId = restaurantId;
 	}
 }

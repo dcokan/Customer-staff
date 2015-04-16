@@ -1,12 +1,10 @@
 package pwr.itApp.customerStaff.presentation;
 
+import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.bean.ViewScoped;
-
-import oracle.net.aso.s;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import pwr.itApp.customerStaff.presentation.components.ElementsList;
@@ -16,9 +14,9 @@ import pwr.itApp.customerStaff.webapp.ApplicationURL;
 import pwr.itApp.customerStaff.webapp.login.Actor;
 
 @Component("employeePage")
-@ViewScoped
-public class EmployeePageBean implements ElementsList<UserDTO> {
-
+@Scope("view")
+public class EmployeePageBean implements ElementsList<UserDTO>, Serializable{
+	private static final long serialVersionUID = -2525555346910993483L;
 	private List<UserDTO> userList;
 	private UserDTO selectedUser;
 

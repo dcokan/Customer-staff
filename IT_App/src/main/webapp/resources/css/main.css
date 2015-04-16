@@ -35,9 +35,12 @@ div.inlineBlockWithBtn a {
 }
 
 table.centralTable {
-	position: relative;
-  	top: 30px;
-  	left: 25%;
+	table-layout: fixed;
+  	margin: auto;
+}
+
+div.centralDiv {
+	text-align: center;
 }
 
 input.newAccount {
@@ -71,4 +74,13 @@ label.centralLabel {
 	display: block;
   	font-size: xx-large;
   	text-align: center;
+}
+
+.minimalAmountBlk {	
+	width: 400px;
+  	display: inline-table;	
+}
+
+.bottomPadding {
+	padding-bottom: 30px;
 }

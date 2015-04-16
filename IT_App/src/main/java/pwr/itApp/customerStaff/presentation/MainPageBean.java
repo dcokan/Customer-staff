@@ -1,16 +1,15 @@
 package pwr.itApp.customerStaff.presentation;
 
-import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import pwr.itApp.customerStaff.domain.User;
@@ -23,8 +22,10 @@ import pwr.itApp.customerStaff.webapp.ApplicationURL;
 import pwr.itApp.customerStaff.webapp.login.Actor;
 
 @Component("mainPage")
-@SessionScoped
-public class MainPageBean implements ElementsList<RestaurantDTO> {
+@Scope("view")
+public class MainPageBean implements ElementsList<RestaurantDTO>, Serializable {
+	private static final long serialVersionUID = -1835800570392004951L;
+
 	private static Logger log = LoggerFactory.logger(MainPageBean.class);
 	
 	@Autowired

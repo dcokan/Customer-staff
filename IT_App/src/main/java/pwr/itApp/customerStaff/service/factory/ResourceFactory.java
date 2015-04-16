@@ -26,7 +26,8 @@ public class ResourceFactory extends AbstractFactoryDTO<Resource, ResourceDTO> {
 		entity.setMeasureUnit(dto.getMeasureUnit());
 		entity.setName(dto.getName());
 		entity.setPrice(dto.getPrice());
-
+		entity.setRestaurantId(dto.getRestaurantId());
+		
 		return entity;
 	}
 

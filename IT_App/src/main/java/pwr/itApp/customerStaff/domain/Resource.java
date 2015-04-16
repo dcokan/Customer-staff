@@ -3,9 +3,11 @@ package pwr.itApp.customerStaff.domain;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import pwr.itApp.customerStaff.domain.converters.MeasureUnitConverter;
@@ -13,6 +15,7 @@ import pwr.itApp.customerStaff.domain.enums.MeasureUnit;
 
 @Entity
 @Table(name = "RESOURCES")
+@SequenceGenerator(name = "ResourceSequence", sequenceName = "SEQ_RESOURCES", allocationSize = 1)
 @NamedQueries(
 		@NamedQuery(name="Resource.findAllOfRest",
 				query = "SELECT r FROM Resource r WHERE "
@@ -20,6 +23,7 @@ import pwr.itApp.customerStaff.domain.enums.MeasureUnit;
 public class Resource {
 
 	@Id
+	@GeneratedValue(generator = "ResourceSequence")
 	private int id;
 	
 	private String name;

@@ -156,7 +156,7 @@ public class User {
 		this.emplType = emplType;
 	}
 
-	public int getCreatorId() {
+	public Integer getCreatorId() {
 		return creatorId;
 	}
 

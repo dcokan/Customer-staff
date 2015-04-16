@@ -2,25 +2,20 @@ package pwr.itApp.customerStaff.domain.enums;
 
 public enum MeasureUnit implements EnumWithId{
 	
-	GRAM ("G", "measureUnit.g", false, true, false),
-	KILOGRAM ("KG", "measureUnit.kg", false, true, false),
-	MILILITER ("ML", "measureUnit.ml", true, false, false),
-	LITER ("L", "measureUnit.l", true, false, false),
-	PIECE ("PC", "measureUnit.pc", false, false, true);
+	GRAM ("G", "measureUnit.g", ResourceType.WEIGHT),
+	KILOGRAM ("KG", "measureUnit.kg", ResourceType.WEIGHT),
+	MILILITER ("ML", "measureUnit.ml", ResourceType.LIQUID),
+	LITER ("L", "measureUnit.l", ResourceType.LIQUID),
+	PIECE ("PC", "measureUnit.pc", ResourceType.PIECE);
 	
 	private String key; 
 	private String nameKey;
-	private boolean liquid;
-	private boolean weight;
-	private boolean piece;
+	private ResourceType resourceType;
 	
-	private MeasureUnit(String key, String nameKey, boolean liquid, 
-				boolean weight, boolean piece) {
+	private MeasureUnit(String key, String nameKey, ResourceType resourceType) {
 		this.key = key;
 		this.nameKey = nameKey;
-		this.liquid = liquid;
-		this.weight = weight;
-		this.piece = piece;
+		this.resourceType = resourceType;
 	}
 
 	@Override
@@ -32,24 +27,29 @@ public enum MeasureUnit implements EnumWithId{
 		return nameKey;
 	}
 
+	private boolean isTypeOf(ResourceType type) {
+		return resourceType.equals(type); 
+	}
+	
 	public boolean isLiquid() {
-		return liquid;
+		return isTypeOf(ResourceType.LIQUID);
 	}
 
+
 	public boolean isWeight() {
-		return weight;
+		return isTypeOf(ResourceType.WEIGHT);
 	}
 
 	public boolean isPiece() {
-		return piece;
+		return isTypeOf(ResourceType.PIECE);
 	}
 
 	public String getImageURL() {
-		if (liquid) {
+		if (isLiquid()) {
 			return "images/liquidRes.png";
-		} else if (weight) {
+		} else if (isWeight()) {
 			return "images/weightRes.png";
-		} else if (piece) {
+		} else if (isPiece()) {
 			return "images/pieceRes.png";
 		} else {
 			throw new UnsupportedOperationException("Not supported MeasueUnit");

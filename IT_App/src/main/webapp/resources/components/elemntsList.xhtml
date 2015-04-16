@@ -31,7 +31,7 @@
         </p:fieldset>
 	  	<ui:repeat var="item" value="#{not empty cc.attrs.valueList ? cc.attrs.valueList : cc.attrs.beanName.valueList}">
 			<p:fieldset legend="#{item.name}" toggleable="true" toggleSpeed="500" collapsed="true">
-	            <h:panelGrid columns="2" cellpadding="5">
+	            <h:panelGrid columns="3" cellpadding="5">
 	                <p:graphicImage name="#{item.imageURL}" width="100" hight="100"/>
 	                <h:outputText styleClass="word-prewrap" value="#{item.description}"></h:outputText>
 	                <h:panelGroup>

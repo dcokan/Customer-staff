@@ -11,6 +11,7 @@
     <ui:define name="east-content">
 	<h:form>
     	<p:tabView activeIndex="#{resourcesBean.activeTabIndex}">
+    		<p:ajax event="tabChange" listener="#{resourcesBean.onTabChange}"/>
     		<p:tab title="Liquid resources">
 		    	<custom:elemntsList valueList="#{resourcesBean.liquidResources}" showEmpty="true" emptyName="New Resource"
 		    		emptyImageURL="images/tmp1.jpg" emptyDescription="Create and define new restaurant"
@@ -32,12 +33,12 @@
     
     <ui:define name="center-content">
     	<h:form id="centerContent" >
-	    	<h:panelGroup id="resourceDetails" rendered="#{resourcesBean.resourceSelected}">
-	    		<ui:include src="/public/resources/detailsPanel.xhtml"/>
+	    	<h:panelGroup id="resourceDetails" rendered="#{resourcesBean.resourceSelected}" layout="block">
+	    		<ui:include src="resources/detailsPanel.xhtml"/>
 	    	</h:panelGroup>
 	    	
-	    	<h:panelGroup id="newResourceBlk"  rendered="#{resourcesBean.newResourceAddMode}">
-	    		<ui:include src="/public/resources/newResource.xhtml"/>
+	    	<h:panelGroup id="newResourceBlk"  rendered="#{resourcesBean.newResourceAddMode}" layout="block">
+	    		<ui:include src="resources/newResource.xhtml"/>
 	    	</h:panelGroup>
     	</h:form>
     </ui:define>
