@@ -29,7 +29,7 @@
     <ui:define name="center-content">
         <h:form id="centerContent" >
             <h:panelGroup id="orderDetails" rendered="#{ordersBean.orderSelected}">
-                <ui:include src="/public/resources/detailsPanel.xhtml"/>
+                <ui:include src="/administration/resources/detailsPanel.xhtml"/>
             </h:panelGroup>
             <h:panelGroup id="newOrder" rendered="#{ordersBean.newOrderAddMode}">
                 <ui:include src="/public/orders/newOrder.xhtml"/>

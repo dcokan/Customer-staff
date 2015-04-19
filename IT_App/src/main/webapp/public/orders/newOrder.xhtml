@@ -21,13 +21,13 @@
 
     <p:tabView>
         <p:tab title="Drinks">
-            Drinks
+            <custom:elemntsList beanName="#{drinksBean}" showEmpty="false"/>
         </p:tab>
         <p:tab title="Meals">
-            Meals
+            <custom:elemntsList beanName="#{mealsBean}" showEmpty="false"/>
         </p:tab>
-        <p:tab title="Deserts">
-            Deserts
+        <p:tab title="Dessert">
+            <custom:elemntsList beanName="#{dessertsBean}" showEmpty="false"/>
         </p:tab>
     </p:tabView>
 </h:form>
