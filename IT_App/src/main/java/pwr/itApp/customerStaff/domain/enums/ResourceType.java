@@ -1,6 +1,8 @@
 package pwr.itApp.customerStaff.domain.enums;
 
-public enum ResourceType {
+import java.io.Serializable;
+
+public enum ResourceType implements Serializable{
 	LIQUID("resourceType.liquid"),
 	WEIGHT("resourceType.weight"),
 	PIECE("resourceType.piece");

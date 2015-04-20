@@ -26,5 +26,9 @@ public class ResourcesService {
 		resourcesDAO.persistNewEntry(resourcesFactory.getEntity(dto));
 	}
 
+	public void updateResource(ResourceDTO resource) {
+		resourcesDAO.updateResouerce(resourcesFactory.getEntity(resource));
+	}
+
 	
 }

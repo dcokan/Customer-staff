@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -31,6 +32,8 @@ public class ResourcesBean implements ElementsList<ResourceDTO>, Serializable{
 	private ResourcesService resourcesService;
 	
 	private static final ResourceType RESOURCE_TABS[] = ResourceType.values();
+
+	private static final String RESOURCE_TO_EDIT = "edit";
 	private List<ResourceDTO> liquidResources;
 	private List<ResourceDTO> gramResources;
 	private List<ResourceDTO> pieceResources;
@@ -39,13 +42,36 @@ public class ResourcesBean implements ElementsList<ResourceDTO>, Serializable{
 	private boolean newResourceAddMode;
 	private boolean minimalAmountDialogShown;
 	private int activeTabIndex;
+	private boolean editResourceAddMode;
 	
 	@PostConstruct
 	public void init() {
-		activeTabIndex = 0;
-		newResource = new ResourceDTO();
+		initFromFlashScope();
 	}
 	
+	private void initFromFlashScope() {
+		newResource = (ResourceDTO) FacesContext.getCurrentInstance().getExternalContext()
+                .getFlash().get(RESOURCE_TO_EDIT);
+		if (newResource != null) {
+			activeTabIndex = findResourceTypeInArray(newResource.getResourceType());
+			newResourceAddMode = true;
+			editResourceAddMode = true;
+		} else {
+			newResource = new ResourceDTO();
+			newResource.setResourceType(RESOURCE_TABS[activeTabIndex]);
+		}
+	}
+	
+	private int findResourceTypeInArray(ResourceType type) {
+		for (int i=0; i<RESOURCE_TABS.length; i++) {
+			if (RESOURCE_TABS[i] == type) {
+				return i;
+			}
+		}
+		
+		return -1;
+	}
+
 	public List<ResourceDTO> getLiquidResources() {
 		if (liquidResources == null) {
 			initResources();
@@ -75,6 +101,7 @@ public class ResourcesBean implements ElementsList<ResourceDTO>, Serializable{
 		newResourceAddMode = true;
 		selectedResource = null;
 		newResource = new ResourceDTO();
+		newResource.setResourceType(RESOURCE_TABS[activeTabIndex]);
 	}
 	
 	public void onNewMinimalAmountConfirm() {
@@ -83,6 +110,19 @@ public class ResourcesBean implements ElementsList<ResourceDTO>, Serializable{
 	
 	public void onTabChange() {
 		newResource.setResourceType(RESOURCE_TABS[activeTabIndex]);
+	}
+	
+	public void onEditResource() {
+//		newResource = selectedResource;
+//		selectedResource = null;
+		FacesContext.getCurrentInstance().getExternalContext()
+                .getFlash().put(RESOURCE_TO_EDIT, selectedResource);
+		ApplicationURL.redirect(ApplicationURL.RESOURCES + ApplicationURL.RELOAD);
+//		newResourceAddMode = false;
+	}
+	
+	public void onResourceUpdate() {
+		resourcesService.updateResource(newResource);
 	}
 	
 	public void changeMinimalAmountDialogVisibility() {
@@ -121,8 +161,8 @@ public class ResourcesBean implements ElementsList<ResourceDTO>, Serializable{
 
 	@Override
 	public void onDeailShowButton(ResourceDTO resource) {
-		selectedResource = resource;
 		newResourceAddMode = false;
+		selectedResource = resource;
 	}
 
 	public String getPriceLabel() {
@@ -175,6 +215,10 @@ public class ResourcesBean implements ElementsList<ResourceDTO>, Serializable{
 	public boolean isNewResourceAddMode() {
 		return newResourceAddMode;
 	}
+	
+	public boolean isEditResourceAddMode() {
+		return editResourceAddMode;
+	}
 
 	public boolean isMinimalAmountDialogShown() {
 		return minimalAmountDialogShown;
@@ -200,7 +244,7 @@ public class ResourcesBean implements ElementsList<ResourceDTO>, Serializable{
 		this.newResource = newResource;
 	}
 	
-	public MeasureUnit[] getMeasureUnits() {
-		return MeasureUnit.values();
+	public List<MeasureUnit> getMeasureUnits() {
+		return MeasureUnit.getByResourceType(newResource.getResourceType());
 	}
 }

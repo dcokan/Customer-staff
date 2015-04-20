@@ -70,10 +70,13 @@ input.newItemBtn {
     font-style: italic;
 }
 
-label.centralLabel {
+.ui-widget label.centralLabel {
 	display: block;
-  	font-size: xx-large;
   	text-align: center;
+  	font-size: 30px;
+  	font-weight: bold;
+  	font-style: italic;
+  	color: black;
 }
 
 .minimalAmountBlk {	

@@ -1,6 +1,10 @@
 package pwr.itApp.customerStaff.domain.enums;
 
-public enum MeasureUnit implements EnumWithId{
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+public enum MeasureUnit implements EnumWithId, Serializable{
 	
 	GRAM ("G", "measureUnit.g", ResourceType.WEIGHT),
 	KILOGRAM ("KG", "measureUnit.kg", ResourceType.WEIGHT),
@@ -27,6 +31,10 @@ public enum MeasureUnit implements EnumWithId{
 		return nameKey;
 	}
 
+	public ResourceType getResourceType() {
+		return resourceType;
+	}
+	
 	private boolean isTypeOf(ResourceType type) {
 		return resourceType.equals(type); 
 	}
@@ -54,6 +62,18 @@ public enum MeasureUnit implements EnumWithId{
 		} else {
 			throw new UnsupportedOperationException("Not supported MeasueUnit");
 		}
+	}
+
+	public static List<MeasureUnit> getByResourceType(ResourceType type) {
+		MeasureUnit[] all = MeasureUnit.values();
+		List<MeasureUnit> filtered = new ArrayList<MeasureUnit>();
+		for (MeasureUnit mUnit: all) {
+			if (mUnit.getResourceType() == type) {
+				filtered.add(mUnit);
+			}
+		}
+		
+		return filtered;
 	}
 
 }

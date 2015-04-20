@@ -9,16 +9,18 @@
 	
 	<p:outputLabel value="Resource's details" styleClass="centralLabel"/>
 	<p:spacer />
-	<h:panelGrid columns="2" styleClass="centralTable">
-			<h:outputLabel value="Resource Name: #{resourcesBean.newResource.name}"/>
+	<h:panelGrid columns="1" styleClass="centralTable">
+			<h:outputLabel value="Resource Name: #{resourcesBean.selectedResource.name}"/>
 		
-			<h:outputLabel value="Minimal amount in product: #{resourcesBean.newResource.minimalAmount}"/>
+			<h:outputLabel value="Minimal amount in product: #{resourcesBean.selectedResource.minimalAmount}"/>
 
-			<h:outputLabel value="Critical amount: #{resourcesBean.newResource.criticalAmount}"/>
+			<h:outputLabel value="Critical amount: #{resourcesBean.selectedResource.criticalAmount}"/>
 
-			<h:outputLabel value="#{resourcesBean.priceLabel}: #{resourcesBean.newResource.price}"/>
+			<h:outputLabel value="#{resourcesBean.priceLabel}: #{resourcesBean.selectedResource.price}"/>
 
-			<h:outputLabel value="Storage amount: #{resourcesBean.newResource.amount}"/>
+			<h:outputLabel value="Storage amount: #{resourcesBean.selectedResource.amount}"/>
+			
+			<h:commandButton action="#{resourcesBean.onEditResource}" value="Edit"/>
 	</h:panelGrid>
 	</h:form>
 </html>

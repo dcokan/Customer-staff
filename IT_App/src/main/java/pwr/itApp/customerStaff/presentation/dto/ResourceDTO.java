@@ -1,11 +1,15 @@
 package pwr.itApp.customerStaff.presentation.dto;
 
+import java.io.Serializable;
+
 import pwr.itApp.customerStaff.domain.enums.MeasureUnit;
 import pwr.itApp.customerStaff.domain.enums.ResourceType;
 import pwr.itApp.customerStaff.presentation.components.ElementComponent;
 
-public class ResourceDTO implements ElementComponent{
-	
+public class ResourceDTO implements ElementComponent, Serializable{
+
+	private static final long serialVersionUID = -5864581131390559808L;
+	private Integer id;
 	private String name;
 	private Double minimalAmount;
 	private Double criticalAmount;
@@ -14,7 +18,6 @@ public class ResourceDTO implements ElementComponent{
 	private MeasureUnit measureUnit;
 	private ResourceType resourceType;
 	private int restaurantId;
-	
 	
 	@Override
 	public String getName() {
@@ -42,6 +45,7 @@ public class ResourceDTO implements ElementComponent{
 
 	public void setMeasureUnit(MeasureUnit measureUnit) {
 		this.measureUnit = measureUnit;
+		setResourceType(measureUnit.getResourceType());
 	}
 
 	public Double getAmount() {
@@ -102,5 +106,13 @@ public class ResourceDTO implements ElementComponent{
 
 	public void setRestaurantId(int restaurantId) {
 		this.restaurantId = restaurantId;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 }

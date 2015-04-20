@@ -76,7 +76,11 @@
 			        
 	<h:panelGroup layout="block" styleClass="centralDiv">
 		<h:commandButton id="newResBtn" value="Create resource" styleClass="centralButton"   
-					action="#{resourcesBean.onNewResource}" type="submit">
+					action="#{resourcesBean.onNewResource}" type="submit" rendered="#{not resourcesBean.editResourceAddMode}">
+				<f:ajax execute="@form" render="@form" />
+		</h:commandButton>
+		<h:commandButton id="updateResBtn" value="Update resource" styleClass="centralButton"   
+					action="#{resourcesBean.onResourceUpdate}" type="submit" rendered="#{resourcesBean.editResourceAddMode}">
 				<f:ajax execute="@form" render="@form" />
 		</h:commandButton>
 	</h:panelGroup>
