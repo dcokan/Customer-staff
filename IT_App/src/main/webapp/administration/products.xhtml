@@ -9,37 +9,25 @@
 
 
     <ui:define name="east-content">
+    
+    		<ui:repeat var="item" value="#{productBean.productsViewData}">
+    			<h:outputText value="#{item.title}"/><br/>
+    		</ui:repeat>
 	<h:form>
-    	<p:tabView activeIndex="#{productBean.activeTabIndex}">
+    	<p:tabView value="#{productBean.productsViewData}" var="item" activeIndex="#{productBean.activeTabIndex}">
     		<p:ajax event="tabChange" listener="#{productBean.onTabChange}"/>
-    		<p:tab title="Liquid resources">
-		    	<custom:elemntsList valueList="#{productBean.liquidResources}" showEmpty="true" emptyName="New Resource"
-		    		emptyImageURL="images/tmp1.jpg" emptyDescription="Create and define new restaurant"
-		    		beanName="#{productBean}" updateAreaNewItem=":#{p:component('centerContent')}" detailArea=":#{p:component('centerContent')}"/>
-    		</p:tab>
-    		<p:tab title="Gram">
-		    	<custom:elemntsList valueList="#{productBean.gramResources}" showEmpty="true" emptyName="New Resource"
-		    		emptyImageURL="images/tmp1.jpg" emptyDescription="Create and define new restaurant"
-		    		beanName="#{productBean}" updateAreaNewItem=":#{p:component('centerContent')}" detailArea=":#{p:component('centerContent')}"/>
-    		</p:tab>
-    		<p:tab title="By piece">
-		    	<custom:elemntsList valueList="#{productBean.pieceResources}" showEmpty="true" emptyName="New Resource"
-		    		emptyImageURL="images/tmp1.jpg" emptyDescription="Create and define new restaurant"
-		    		beanName="#{productBean}" updateAreaNewItem=":#{p:component('centerContent')}" detailArea=":#{p:component('centerContent')}"/>
+	    	<p:tab title="#{item.title}">
+			  	<custom:elemntsList valueList="#{item.productList}" showEmpty="true" emptyName="New Product"
+			   		emptyImageURL="#{item.imageURL}" emptyDescription="#{item.emptyDesc}"
+			   		beanName="#{productBean}" updateAreaNewItem=":#{p:component('centerContent')}" detailArea=":#{p:component('centerContent')}"/>
     		</p:tab>
     	</p:tabView>
 	</h:form>
     </ui:define>
     
     <ui:define name="center-content">
-    	<h:form id="centerContent" >
-	    	<h:panelGroup id="resourceDetails" rendered="#{productBean.resourceSelected}" layout="block">
-	    		<ui:include src="resources/detailsPanel.xhtml"/>
-	    	</h:panelGroup>
-	    	
-	    	<h:panelGroup id="newResourceBlk"  rendered="#{productBean.newResourceAddMode}" layout="block">
-	    		<ui:include src="resources/newResource.xhtml"/>
-	    	</h:panelGroup>
+    	<h:form id="centerContent">
+    		<h:outputText value="temp" />
     	</h:form>
     </ui:define>
 </ui:composition>
