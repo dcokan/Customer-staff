@@ -2,14 +2,45 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html" xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:p="http://primefaces.org/ui" xmlns:custom="http://java.sun.com/jsf/composite/components">
+      xmlns:p="http://primefaces.org/ui" xmlns:custom="http://java.sun.com/jsf/composite/components"
+      xmlns:f="http://java.sun.com/jsf/core">
 
 <ui:composition template="/WEB-INF/templates/main_site.xhtml">
 
 
     <ui:define name="east-content">
-    	<custom:elemntsList beanName="#{mainPage}" showEmpty="true" emptyName="New Restaurant"
-    		emptyImageURL="images/tmp1.jpg" emptyDescription="Create and define new restaurant"/>
+	<h:form>
+    	<p:tabView activeIndex="#{productBean.activeTabIndex}">
+    		<p:ajax event="tabChange" listener="#{productBean.onTabChange}"/>
+    		<p:tab title="Liquid resources">
+		    	<custom:elemntsList valueList="#{productBean.liquidResources}" showEmpty="true" emptyName="New Resource"
+		    		emptyImageURL="images/tmp1.jpg" emptyDescription="Create and define new restaurant"
+		    		beanName="#{productBean}" updateAreaNewItem=":#{p:component('centerContent')}" detailArea=":#{p:component('centerContent')}"/>
+    		</p:tab>
+    		<p:tab title="Gram">
+		    	<custom:elemntsList valueList="#{productBean.gramResources}" showEmpty="true" emptyName="New Resource"
+		    		emptyImageURL="images/tmp1.jpg" emptyDescription="Create and define new restaurant"
+		    		beanName="#{productBean}" updateAreaNewItem=":#{p:component('centerContent')}" detailArea=":#{p:component('centerContent')}"/>
+    		</p:tab>
+    		<p:tab title="By piece">
+		    	<custom:elemntsList valueList="#{productBean.pieceResources}" showEmpty="true" emptyName="New Resource"
+		    		emptyImageURL="images/tmp1.jpg" emptyDescription="Create and define new restaurant"
+		    		beanName="#{productBean}" updateAreaNewItem=":#{p:component('centerContent')}" detailArea=":#{p:component('centerContent')}"/>
+    		</p:tab>
+    	</p:tabView>
+	</h:form>
+    </ui:define>
+    
+    <ui:define name="center-content">
+    	<h:form id="centerContent" >
+	    	<h:panelGroup id="resourceDetails" rendered="#{productBean.resourceSelected}" layout="block">
+	    		<ui:include src="resources/detailsPanel.xhtml"/>
+	    	</h:panelGroup>
+	    	
+	    	<h:panelGroup id="newResourceBlk"  rendered="#{productBean.newResourceAddMode}" layout="block">
+	    		<ui:include src="resources/newResource.xhtml"/>
+	    	</h:panelGroup>
+    	</h:form>
     </ui:define>
 </ui:composition>
 </html>

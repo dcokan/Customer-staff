@@ -11,7 +11,7 @@
 			<composite:attribute name="emptyImageURL" />
 			<composite:attribute name="emptyDescription" />
 			<composite:attribute name="valueList" default="#{null}" />
-			<composite:attribute name="updateArea"/>
+			<composite:attribute name="detailArea"/>
 			<composite:attribute name="updateAreaNewItem"/>
 	  </composite:interface>
  
@@ -37,7 +37,7 @@
 	                <h:panelGroup>
 		                <h:outputText styleClass="word-prewrap" value="#{item.description}"></h:outputText>
 		                <h:commandLink value="showDetails" action="#{cc.attrs.beanName.onDeailShowButton(item)}">
-		                	<p:ajax update="#{cc.attrs.updateArea}"/>
+		                	<p:ajax update="#{cc.attrs.detailArea}"/>
 		                </h:commandLink>
 	                </h:panelGroup>
 	            </h:panelGrid>
