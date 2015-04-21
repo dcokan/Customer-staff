@@ -30,5 +30,9 @@ public class ResourcesService {
 		resourcesDAO.updateResouerce(resourcesFactory.getEntity(resource));
 	}
 
+	public ResourceDTO getResourceById(int id) {
+		return resourcesFactory.getDTO(resourcesDAO.getResource(id));
+	}
+
 	
 }

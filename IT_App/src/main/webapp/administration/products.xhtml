@@ -9,10 +9,6 @@
 
 
     <ui:define name="east-content">
-    
-    		<ui:repeat var="item" value="#{productBean.productsViewData}">
-    			<h:outputText value="#{item.title}"/><br/>
-    		</ui:repeat>
 	<h:form>
     	<p:tabView value="#{productBean.productsViewData}" var="item" activeIndex="#{productBean.activeTabIndex}">
     		<p:ajax event="tabChange" listener="#{productBean.onTabChange}"/>
@@ -27,7 +23,13 @@
     
     <ui:define name="center-content">
     	<h:form id="centerContent">
-    		<h:outputText value="temp" />
+	    	<h:panelGroup id="productDetails" rendered="#{productBean.productSelected}" layout="block">
+	    		<ui:include src="products/detailsPanel.xhtml"/>
+	    	</h:panelGroup>
+	    	
+	    	<h:panelGroup id="newProductBlk"  rendered="#{productBean.newProductMode}" layout="block">
+	    		<ui:include src="products/newProducts.xhtml"/>
+	    	</h:panelGroup>
     	</h:form>
     </ui:define>
 </ui:composition>

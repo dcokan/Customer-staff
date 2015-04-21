@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:custom="http://java.sun.com/jsf/composite/components">
+	<h:form>
+	
+	<p:outputLabel value="New product" styleClass="centralLabel"/>
+	<p:spacer />
+	<h:panelGrid id="newProductBlk" columns="2" styleClass="centralTable" >
+			<h:outputLabel value="Product Name:" for="nameInput" />
+			<p:inputText id="nameInput" required="true" 
+				value="#{productBean.newProduct.name}"/>
+				
+			<h:outputLabel value="Price:" for="priceInput"/>		
+			<p:inputText id="priceInput" value="#{productBean.newProduct.price}"
+				required="true"/>
+			
+			<h:outputLabel value="Product description:" for="descriptionInput" />
+			<p:inputTextarea id="descriptionInput" rows="5" cols="50" maxlength="200" value="#{productBean.newProduct.productDescription}"/>
+	</h:panelGrid >
+	<h:panelGroup id="productRecipeBlk" layout="block" >
+        <p:outputLabel for="resourcesList" value="Chose resource:" />
+        <p:selectOneListbox id="resourcesList" value="#{productBean.resourceToBeAdded}" converter="resourceConverter">
+			<f:selectItems value="#{productBean.resourcesFromRestaurant}" var="var" itemLabel="#{var.name}" itemValue="#{var}"/>
+        </p:selectOneListbox>
+        
+        <h:panelGrid columns="1">
+        	<p:inputText id="resourceAmountInput" value="#{productBean.resourceAmount}" />
+        	<p:slider for="resourceAmountInput" type="vertical"/>
+        	<h:commandButton id="addResourceBtn" value=">>" action="#{productBean.onResourceAdded}">
+        		<f:ajax render=":#{p:component('addedResources')}"/>
+        	</h:commandButton>
+        </h:panelGrid>
+        
+        <p:outputLabel for="addedResources" value="Selected resources:"/>
+        <p:selectOneListbox id="addedResources" disabled="true" converter="resourceConverter">
+        	<f:selectItems value="#{productBean.resourcesInProduct}" var="var" itemLabel="#{var.name}" itemValue="#{var}"/>
+        </p:selectOneListbox>
+    </h:panelGroup>
+ 
+	</h:form>
+</html>

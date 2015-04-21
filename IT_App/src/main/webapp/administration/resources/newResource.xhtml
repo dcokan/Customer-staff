@@ -17,7 +17,7 @@
 			<h:outputLabel value="Measure unit:" for="measureUnitInput"/>		
 			<p:selectOneMenu id="measureUnitInput" value="#{resourcesBean.newResource.measureUnit}"
 				required="true">
-				<f:selectItem label="" value="#{null}"/>
+				<f:selectItem label=" " value="#{null}"/>
 				<f:selectItems value="#{resourcesBean.measureUnits}" var="var" itemLabel="#{var.nameKey}"/>
 			</p:selectOneMenu>
 		
