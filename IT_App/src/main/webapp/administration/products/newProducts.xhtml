@@ -8,7 +8,6 @@
 	<h:form>
 	<p:outputLabel value="New product" styleClass="centralLabel"/>
 	<p:spacer />
-	<p:messages id="messages" showDetail="true" autoUpdate="true" />
 	
 	<h:outputScript>
 		$(window).load(function(){
@@ -19,20 +18,20 @@
 	</h:outputScript>
 	<h:panelGrid id="newProductBlk" columns="2" styleClass="centralTable" >
 			<h:outputLabel value="Product Name:" for="nameInput" />
-			<p:inputText id="nameInput" required="false" 
+			<p:inputText id="nameInput" required="true" 
 				value="#{productBean.newProduct.name}"/>
 				
 			<h:outputLabel value="Price:" for="priceInput"/>		
 			<p:inputText id="priceInput" value="#{productBean.newProduct.price}"
-				required="false"/>
+				required="true"/>
 			
 			<h:outputLabel value="Product description:" for="descriptionInput" />
-			<p:inputTextarea id="descriptionInput" rows="5" cols="50" maxlength="200" value="#{productBean.newProduct.productDescription}"/>
+			<p:inputTextarea id="descriptionInput" rows="5" cols="30" maxlength="200" value="#{productBean.newProduct.productDescription}"/>
 	</h:panelGrid >
 	
-	<h:panelGroup id="productRecipeBlk" layout="block" >
+	<h:panelGrid columns="1" id="productRecipeBlk" layout="block" style="width:100%">
 
-		<h:panelGroup id="subRecipe" styleClass="someCl" layout="block"> 
+		<h:panelGroup id="subRecipe" styleClass="recipeBlock" layout="block"> 
 			<h:panelGroup style="display: inline-block;" layout="block" styleClass="listboxItem">
 		        <p:outputLabel for="resourcesList" value="Chose resource:" />
 		        <p:selectOneListbox id="resourcesList" value="#{productBean.resourceToBeAdded}" converter="#{resourceConverter}">
@@ -41,15 +40,22 @@
 		        </p:selectOneListbox>
 	        </h:panelGroup>
 	        
-			<h:panelGroup id="resourceAmountInputBlk" style="display: inline-block;" layout="block">
-		        <h:panelGrid columns="1">
+			<h:panelGroup id="resourceAmountInputBlk" style="display: inline-block; height: 100%;" layout="block">
+		        <h:panelGrid styleClass="resourceSlider" columns="1">
 		        	<p:spinner id="resourceAmountInput" stepFactor="#{productBean.resourceToBeAdded.minimalAmount}" min="0" 
 		        		max="#{productBean.resourceToBeAdded.minimalAmount*100}" value="#{productBean.resourceAmount}"/>
 		        	
-		        	<h:commandButton id="addResourceBtn" value=">>" action="#{productBean.onResourceAdded}" 
-		        		disabled="#{empty productBean.resourceToBeAdded}">
-		        		<f:ajax render=":#{p:component('addedResources')}" execute="resourceAmountInput"/>
-		        	</h:commandButton>
+		        	<h:panelGroup layout="block">
+			        	<h:commandButton id="removeResourceBtn" value="--" action="#{productBean.onResourceAdded}" 
+			        		disabled="#{empty productBean.resourceToBeAdded}">
+			        		<f:ajax render=":#{p:component('addedResources')}" execute="resourceAmountInput"/>
+			        	</h:commandButton>
+			        	
+			        	<h:commandButton id="addResourceBtn" value=">>" action="#{productBean.onResourceAdded}" 
+			        		disabled="#{empty productBean.resourceToBeAdded}">
+			        		<f:ajax render=":#{p:component('addedResources')}" execute="resourceAmountInput"/>
+			        	</h:commandButton>
+		        	</h:panelGroup>
 		        </h:panelGrid>
 	        </h:panelGroup>
 	        
@@ -60,6 +66,7 @@
 		        </p:selectOneListbox>
 	        </h:panelGroup>
         </h:panelGroup>
+    </h:panelGrid>
         
         <h:panelGroup layout="block" styleClass="centralDiv">
 			<h:commandButton id="newProductBtn" value="Create product" styleClass="centralButton"   
@@ -71,6 +78,5 @@
 					<f:ajax execute="@form" render="@form" />
 			</h:commandButton>
 		</h:panelGroup>
-    </h:panelGroup>
     </h:form>
 </html>

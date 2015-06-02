@@ -7,6 +7,19 @@ td {
 	padding: inherit;	
 }
 
+.resourceSlider {
+ 	position: relative;
+  	top: 65px;
+  	left: 14px;
+}
+table.resourceSlider td, table.resourceSlider td span input {
+	width: 80px;
+}
+
+div.recipeBlock {
+    margin: auto;
+ 	display: table;
+}
 
 .wholeLineTable {
 	position: absolute;
@@ -193,4 +206,8 @@ div.ui-layout-unit.ui-layout-pane-east div.ui-tabs.ui-widget.ui-tabs-top {
 
 div.ui-layout-pane-east fieldset.ui-fieldset.ui-widget.ui-widget-content {
 	margin-top: 15px;
+}
+
+.ui-widget-content .ui-inputfield.ui-state-error {
+	border: 2.5px solid #E86175;
 }

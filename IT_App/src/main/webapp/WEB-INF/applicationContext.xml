@@ -15,6 +15,9 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
         p:username="IT_APP_USER" p:password="IT_APP" p:initialSize="5" p:maxActive="10">
     </bean>
 
+	<bean id="applicationContextProvder"
+                        class="pwr.itApp.customerStaff.webapp.CustomApplicationContextHandler"/>
+                        
 	 <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
 	    <property name="scopes">
 	        <map>

@@ -1,9 +1,9 @@
 package pwr.itApp.customerStaff.persistance;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import pwr.itApp.customerStaff.domain.Resource;
 
@@ -17,6 +17,12 @@ public class ResourceDAO extends GenericDAO<Resource>{
 	public List<Resource> findAllResourcesInRestaurantById(Integer restId) {
 		return em.createNamedQuery("Resource.findAllOfRest", Resource.class)
 				.setParameter("restaurantId", restId)
+				.getResultList();
+	}
+
+	public List<Resource> findResourcesByIds(Collection<Integer> ids) {
+		return em.createNamedQuery("Resource.findResourcesByIds", Resource.class)
+				.setParameter("ids", ids)
 				.getResultList();
 	}
 }

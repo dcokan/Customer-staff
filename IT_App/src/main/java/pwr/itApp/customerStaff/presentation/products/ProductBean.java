@@ -24,6 +24,7 @@ import pwr.itApp.customerStaff.service.RestaurantService;
 import pwr.itApp.customerStaff.webapp.ApplicationURL;
 import pwr.itApp.customerStaff.webapp.ResourceBundle;
 import pwr.itApp.customerStaff.webapp.login.Actor;
+import pwr.itApp.customerStaff.webapp.utils.LabelUtils;
 
 @Component("productBean")
 @Scope(value = "view")
@@ -74,6 +75,9 @@ public class ProductBean implements Serializable, ElementsList<ProductDTO>{
 	private void initFromFlash() {
 		newProduct = (ProductDTO) ApplicationURL.getFromFlash(PRODUCT_EDIT);
 		editProductMode = newProduct != null;
+		if (editProductMode) {
+			resourcesInProductLabels = resourceService.getResourceLabels(newProduct.getResourcesInProduct());
+		}
 	}
 
 	private void initTabs() {		
@@ -93,7 +97,8 @@ public class ProductBean implements Serializable, ElementsList<ProductDTO>{
 		if (resourcesInProductLabels.containsKey(resourceToBeAdded.getId())) {
 			resourcesInProductLabels.remove(resourceToBeAdded.getId());
 		} 
-		resourcesInProductLabels.put(resourceToBeAdded.getId(), prepareLabel(resourceToBeAdded, resourceAmount));
+		resourcesInProductLabels.put(resourceToBeAdded.getId(), LabelUtils.prepareResourceLabel(
+				resourceToBeAdded.getName(), resourceAmount));
 	}
 
 	public List<ProductsViewData> getproductsViewData() {
@@ -121,6 +126,7 @@ public class ProductBean implements Serializable, ElementsList<ProductDTO>{
 	public void onNewItemButton() {
 		newProductMode = true;
 		selectedProduct = null;
+		resourcesInProductLabels = new HashMap<Integer, String>();
 		newProduct = new ProductDTO();
 	}
 
@@ -223,10 +229,6 @@ public class ProductBean implements Serializable, ElementsList<ProductDTO>{
 //		}
 //		return null;
 //	}
-
-	private String prepareLabel(ResourceDTO resource, Double amount) {
-		return resource.getName() + " (" + String.format("%.3f", amount) +" )";
-	}
 
 	public ProductDTO getSelectedProduct() {
 		return selectedProduct;

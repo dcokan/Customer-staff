@@ -15,16 +15,11 @@
 <!-- <h:form> -->
     <div class="page">
         <p:layout fullPage="true">
-            <p:layoutUnit position="north" size="100">
+            <p:layoutUnit styleClass="topMenu" position="north" size="150">
                 <ui:insert name="north-content">
-                	<h:form rendered="#{not mainPage.userLogged}">
-                	<div class="ui-grid">
-			            <div class="ui-grid-row">
-			                <div class="ui-grid-col-6">
-			                    <h:outputText value="BANNER."/>
-			                </div>
-			                <div class="ui-grid-col-6"></div>
-			                <div class="ui-grid-col-6">
+                	<h:form rendered="#{not mainPage.userLogged}" styleClass="mainBanner_left" >
+								<h:panelGroup layout="block" styleClass="mainBanner_right loginBlock" >
+								
 			                        <h:panelGrid columns="2" cellpadding="5" styleClass="inlineTable">
 			                            <h:outputText for="loginInput" value="Login: "/>
 			                            <p:inputText id="loginInput" value="#{loginForm.loginUsername}"/>
@@ -34,40 +29,34 @@
 			
 									<h:panelGroup layout="block" styleClass="inlineBlockWithBtn">
 			                        	<h:commandButton id="loginBtn" value="Login"  actionListener="#{mainPage.loginAction()}" />
-			                        	<h:commandLink value="Create account"/>
-			                        	<h:commandLink value="Password reminder"/>
+			                        	<h:commandLink value="Create account" action="#{mainPage.onAccountCreate}"/>
+			                        	<h:commandLink value="Password reminder" action="#{mainPage.onPasswordReminder}"/>
 			                        </h:panelGroup>
-			                </div>
-			            </div>
-			        </div>
+			                    </h:panelGroup>
 			        </h:form>
-			        <h:form rendered="#{mainPage.userLogged}" styleClass="adminMenu">
-		                <p:selectOneButton value="#{mainPage.selectedTab}" >
-							<f:selectItems value="#{mainPage.adminTabs}" var="var" itemLabel="#{var.nameKey}" 
-								itemValue="#{var}"/>
-							<p:ajax listener="#{mainPage.onAdminTabChange}"/>
-				        </p:selectOneButton>
-				        <h:outputText id="loggedUsrInfo" value="#{mainPage.loggedUserName}"/>
-				        <h:commandLink id="logoutLnk" value="(logout)" action="#{mainPage.onLogout}" />
-			        </h:form>
+			        <h:form rendered="#{mainPage.userLogged}">
+			       	 	<h:panelGrid columns="2" columnClasses="wideColumn" styleClass="wholeLineTable">
+				        	<h:panelGroup layout="block" styleClass="mainBanner_left">
+				                <p:selectOneButton value="#{mainPage.selectedTab}" styleClass="adminMenu" >
+									<f:selectItems value="#{mainPage.adminTabs}" var="var" itemLabel="#{var.nameKey}" 
+										itemValue="#{var}"/>
+									<p:ajax listener="#{mainPage.onAdminTabChange}"/>
+						        </p:selectOneButton>
+					        </h:panelGroup>
+					        <h:panelGroup layout="block" styleClass="mainBanner_right loggedUserBlk">
+						        <h:outputText id="loggedUsrInfo" styleClass="loggedUsrLbl" value="#{mainPage.loggedUserName}"/>
+						        <h:commandLink id="logoutLnk" value="(logout)" styleClass="loggedUsrLogoutLink" action="#{mainPage.onLogout}" />
+					        </h:panelGroup>
+			        	</h:panelGrid>
+				    </h:form>
                 </ui:insert>
             </p:layoutUnit>
-            <p:layoutUnit position="south" size="50">
-                <ui:insert name="south-content">
-                    <h:outputText value="FOOTER."/>
-                </ui:insert>
-            </p:layoutUnit>
-            <p:layoutUnit position="west" size="100">
-                <ui:insert name="west-content">
-                    Simple default content of empty site
-                </ui:insert>
-            </p:layoutUnit>
-            <p:layoutUnit position="east" size="600">
+            <p:layoutUnit styleClass="noBorderDiv" position="east" size="600">
                 <ui:insert name="east-content">
                     Simple default content of empty site
                 </ui:insert>
             </p:layoutUnit>
-            <p:layoutUnit position="center">
+            <p:layoutUnit styleClass="noBorderDiv" position="center">
                 <ui:insert name="center-content">
                     Simple default content of empty site
                 </ui:insert>

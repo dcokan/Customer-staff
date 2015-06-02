@@ -16,10 +16,15 @@ import pwr.itApp.customerStaff.domain.enums.MeasureUnit;
 @Entity
 @Table(name = "RESOURCES")
 @SequenceGenerator(name = "ResourceSequence", sequenceName = "SEQ_RESOURCES", allocationSize = 1)
-@NamedQueries(
+@NamedQueries({
 		@NamedQuery(name="Resource.findAllOfRest",
 				query = "SELECT r FROM Resource r WHERE "
-						+ "r.restaurantId = :restaurantId"))
+						+ "r.restaurantId = :restaurantId"),
+		@NamedQuery(name="Resource.findResourcesByIds",
+				query = "SELECT r FROM Resource r WHERE "
+				 		+ "r.id in (:ids)")
+		}
+)
 public class Resource {
 
 	@Id
