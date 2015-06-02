@@ -14,11 +14,14 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import pwr.itApp.customerStaff.domain.enums.ProductType;
+import pwr.itApp.customerStaff.persistance.ProductDAO;
 import pwr.itApp.customerStaff.presentation.components.ElementsList;
 import pwr.itApp.customerStaff.presentation.dto.ProductDTO;
 import pwr.itApp.customerStaff.presentation.dto.ResourceDTO;
 import pwr.itApp.customerStaff.service.ProductService;
 import pwr.itApp.customerStaff.service.ResourcesService;
+import pwr.itApp.customerStaff.service.RestaurantService;
+import pwr.itApp.customerStaff.webapp.ApplicationURL;
 import pwr.itApp.customerStaff.webapp.ResourceBundle;
 import pwr.itApp.customerStaff.webapp.login.Actor;
 
@@ -27,12 +30,20 @@ import pwr.itApp.customerStaff.webapp.login.Actor;
 public class ProductBean implements Serializable, ElementsList<ProductDTO>{
 
 	private static final long serialVersionUID = 7519617970252000923L;
+	private static final ProductType PRODUCT_TYPES[] = ProductType.values();
+	private static final String PRODUCT_EDIT = "edit_product";
 
 	@Autowired
 	private ProductService productService;
 	
+	@Autowired 
+	private ProductDAO productRepo;
+	
 	@Autowired
 	private ResourcesService resourceService;
+	
+	@Autowired
+	private RestaurantService restaurantService;
 	
 	@Autowired
 	private Actor actor;
@@ -45,35 +56,48 @@ public class ProductBean implements Serializable, ElementsList<ProductDTO>{
 	private ProductDTO selectedProduct;
 	private List<ResourceDTO> resourcesList;
 	private Double resourceAmount;
-	private Map<Double, ResourceDTO> resourcesInProduct;
 	private boolean newProductMode;
 	private ResourceDTO resourceToBeAdded;
+	private List<ProductsViewData> tabs;
+	private Map<Integer, String> resourcesInProductLabels;
+	private ProductType selectedProductType;
+	private boolean editProductMode;
 	
 	@PostConstruct
 	public void init() {
-		resourcesInProduct = new HashMap<Double, ResourceDTO>();
+		resourcesInProductLabels = new HashMap<Integer, String>();
+		initTabs();
+		initFromFlash();
 	}
 
-	public void onResourceAdded() {
-		
+	//TODO : Consider removing selected Product value and using in all occurrences newProduct instead
+	private void initFromFlash() {
+		newProduct = (ProductDTO) ApplicationURL.getFromFlash(PRODUCT_EDIT);
+		editProductMode = newProduct != null;
 	}
-	
-	public Collection<ResourceDTO> getResourcesInProduct() {
-		return resourcesInProduct.values();
-	}
-	
-	public List<ProductsViewData> getproductsViewData() {
-		List<ProductsViewData> data = new ArrayList<ProductsViewData>();
-		for (ProductType type: ProductType.values()) {
+
+	private void initTabs() {		
+		tabs = new ArrayList<ProductsViewData>();
+		for (ProductType type: PRODUCT_TYPES) {
 			ProductsViewData productData = new ProductsViewData();
-			productData.setProductList(productService.getProductsByType(type));
+			productData.setProductList(restaurantService.getProductsByType(actor.getChosenRestaurant(), type));
 			productData.setEmptyDescription(getFormattedEmptyDesc(type));
 			productData.setImageURL(type.getImageURL());
 			productData.setTitle(rb.getString(type.getNameKey()));
-			data.add(productData);
+			tabs.add(productData);
 		}
-		
-		return data;
+	}
+
+	public void onResourceAdded() {
+		resourceAmount = newProduct.addResourceToReceipt(resourceToBeAdded.getId(), resourceAmount);
+		if (resourcesInProductLabels.containsKey(resourceToBeAdded.getId())) {
+			resourcesInProductLabels.remove(resourceToBeAdded.getId());
+		} 
+		resourcesInProductLabels.put(resourceToBeAdded.getId(), prepareLabel(resourceToBeAdded, resourceAmount));
+	}
+
+	public List<ProductsViewData> getproductsViewData() {
+		return tabs;
 	}
 
 	private String getFormattedEmptyDesc(ProductType type) {
@@ -100,9 +124,43 @@ public class ProductBean implements Serializable, ElementsList<ProductDTO>{
 		newProduct = new ProductDTO();
 	}
 
+	public void onProductUpdate() {
+		productService.updateProduct(newProduct);
+		ApplicationURL.redirect(ApplicationURL.PRODUCTS);
+	}
+	
+	public void onNewProduct() {
+		newProduct.setProductType(selectedProductType);
+		assignProductToRestaurant();
+		restaurantService.updateRestaurant(actor.getChosenRestaurant());
+		ApplicationURL.redirect(ApplicationURL.PRODUCTS);
+	}
+	
+	private void assignProductToRestaurant() {
+		actor.getChosenRestaurant().getProducts().add(newProduct);
+	}
+
+	public void onTabChange() {
+		newProduct = null;
+		selectedProductType = PRODUCT_TYPES[activeTabIndex];
+	}
+	
+	public void onEditProduct() {
+		ApplicationURL.puToFlash(PRODUCT_EDIT, selectedProduct);
+		ApplicationURL.redirect(ApplicationURL.PRODUCTS);
+	}
+	
 	@Override
 	public void onDeailShowButton(ProductDTO item) {
 		selectedProduct = item;
+	}
+	
+	public double getMaxAmountInProduct() {
+		return resourceToBeAdded == null ? 0 : resourceToBeAdded.getMinimalAmount()*10000;
+	}
+
+	public void onResourceSelected() {
+		resourceAmount = resourceToBeAdded.getMinimalAmount();
 	}
 
 	public boolean isProductSelected() {
@@ -144,16 +202,45 @@ public class ProductBean implements Serializable, ElementsList<ProductDTO>{
 	public void setResourceAmount(Double resourceAmount) {
 		this.resourceAmount = resourceAmount;
 	}
-
-	public void setResourcesInProduct(Map<Double, ResourceDTO> resourcesInProduct) {
-		this.resourcesInProduct = resourcesInProduct;
-	}
-
+	
 	public ResourceDTO getResourceToBeAdded() {
 		return resourceToBeAdded;
 	}
 
 	public void setResourceToBeAdded(ResourceDTO resourceToBeAdded) {
 		this.resourceToBeAdded = resourceToBeAdded;
+	}
+	
+	public Collection<String> getResourcesInProduct() {
+		return resourcesInProductLabels.values();
+	}
+
+//	private ResourceDTO findInResourcesList(Integer id) {
+//		for (ResourceDTO resource: resourcesList) {
+//			if (resource.getId().equals(id)) {
+//				return resource;
+//			}
+//		}
+//		return null;
+//	}
+
+	private String prepareLabel(ResourceDTO resource, Double amount) {
+		return resource.getName() + " (" + String.format("%.3f", amount) +" )";
+	}
+
+	public ProductDTO getSelectedProduct() {
+		return selectedProduct;
+	}
+
+	public void setSelectedProduct(ProductDTO selectedProduct) {
+		this.selectedProduct = selectedProduct;
+	}
+
+	public boolean isEditProductMode() {
+		return editProductMode;
+	}
+
+	public void setEditProductMode(boolean editProductMode) {
+		this.editProductMode = editProductMode;
 	}
 }

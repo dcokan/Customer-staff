@@ -1,8 +1,11 @@
 package pwr.itApp.customerStaff.webapp;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.faces.context.FacesContext;
+
+import pwr.itApp.customerStaff.presentation.dto.ResourceDTO;
 
 
 public class ApplicationURL {
@@ -20,11 +23,29 @@ public class ApplicationURL {
 	public static final String NEW_EMPLOYEE = "/public/create_account.jsf";
 	
 
+	/**
+	 * Redirect to given address and redirect by default
+	 * @param URL - address where user has to be redirected to
+	 */
 	public static void redirect(String URL) {
+		redirect(URL, true);
+	}
+
+	public static void redirect(String URL, boolean reload) {
 	    try {
-			FacesContext.getCurrentInstance().getExternalContext().redirect(URL);
+			FacesContext.getCurrentInstance().getExternalContext().redirect(URL + (reload ? RELOAD : ""));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static void puToFlash(String itemName, Serializable item) {
+		FacesContext.getCurrentInstance().getExternalContext()
+                .getFlash().put(itemName, item);
+	}
+
+	public static Object getFromFlash(String itemCode) {
+		return FacesContext.getCurrentInstance().getExternalContext()
+			.getFlash().get(itemCode);
 	}
 }

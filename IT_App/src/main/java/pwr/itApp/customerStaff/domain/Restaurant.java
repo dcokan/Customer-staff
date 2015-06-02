@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import pwr.itApp.customerStaff.domain.converters.YNBooleanConverter;
@@ -32,8 +34,8 @@ public class Restaurant {
 	
 	private String mail;
 	
-	@Column(name = "OWNER_ID")
-	private Integer ownerId;
+//	@Column(name = "OWNER_ID")
+//	private Integer ownerId;
 	
 	@Convert(converter = YNBooleanConverter.class)
 	private boolean deleted;
@@ -45,6 +47,19 @@ public class Restaurant {
 	@OneToMany(fetch=FetchType.EAGER, cascade={CascadeType.ALL})
 	@JoinColumn(name="RESTAURANT_ID")
 	private List<Table> tables;
+	
+
+//	@OneToMany(cascade=CascadeType.ALL)
+//	@JoinTable(name = "PRODUCT_RESTAURANT_MAP", 
+//	  		joinColumns = @JoinColumn(name = "PRODUCT_ID", referencedColumnName="ID"),
+//	  		inverseJoinColumns = @JoinColumn(name = "RESTAUTANT_ID", referencedColumnName="ID" ))
+	
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "PRODUCT_RESTAURANT_MAP",
+		joinColumns = { 
+			@JoinColumn(name = "RESTAURANT_ID") }, 
+			inverseJoinColumns = { @JoinColumn(name = "PRODUCT_ID") })
+	private List<Product> products;
 	
 	public int getId() {
 		return id;
@@ -102,13 +117,13 @@ public class Restaurant {
 		this.mail = mail;
 	}
 
-	public Integer getOwnerId() {
-		return ownerId;
-	}
-
-	public void setOwnerId(Integer ownerId) {
-		this.ownerId = ownerId;
-	}
+//	public Integer getOwnerId() {
+//		return ownerId;
+//	}
+//
+//	public void setOwnerId(Integer ownerId) {
+//		this.ownerId = ownerId;
+//	}
 
 	public boolean isDeleted() {
 		return deleted;
@@ -124,5 +139,21 @@ public class Restaurant {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public List<Table> getTables() {
+		return tables;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setTables(List<Table> tables) {
+		this.tables = tables;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
 }

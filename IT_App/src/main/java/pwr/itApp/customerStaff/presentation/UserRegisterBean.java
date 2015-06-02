@@ -49,7 +49,7 @@ public class UserRegisterBean implements Serializable {
 		}
 		prepareAccountForUser(user);
 		userService.createUser(user);
-		return ApplicationURL.EMPLOYEERS + ApplicationURL.RELOAD;
+		return ApplicationURL.MAIN_PAGE + ApplicationURL.RELOAD;
 	}
 	
 	private String createNewUser(EmplType emplType, UserDTO user) {

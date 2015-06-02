@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -50,8 +49,7 @@ public class ResourcesBean implements ElementsList<ResourceDTO>, Serializable{
 	}
 	
 	private void initFromFlashScope() {
-		newResource = (ResourceDTO) FacesContext.getCurrentInstance().getExternalContext()
-                .getFlash().get(RESOURCE_TO_EDIT);
+		newResource = (ResourceDTO) ApplicationURL.getFromFlash(RESOURCE_TO_EDIT);
 		if (newResource != null) {
 			activeTabIndex = findResourceTypeInArray(newResource.getResourceType());
 			newResourceAddMode = true;
@@ -113,12 +111,8 @@ public class ResourcesBean implements ElementsList<ResourceDTO>, Serializable{
 	}
 	
 	public void onEditResource() {
-//		newResource = selectedResource;
-//		selectedResource = null;
-		FacesContext.getCurrentInstance().getExternalContext()
-                .getFlash().put(RESOURCE_TO_EDIT, selectedResource);
-		ApplicationURL.redirect(ApplicationURL.RESOURCES + ApplicationURL.RELOAD);
-//		newResourceAddMode = false;
+		ApplicationURL.puToFlash(RESOURCE_TO_EDIT, selectedResource);
+		ApplicationURL.redirect(ApplicationURL.RESOURCES);
 	}
 	
 	public void onResourceUpdate() {
@@ -132,7 +126,7 @@ public class ResourcesBean implements ElementsList<ResourceDTO>, Serializable{
 	public void onNewResource() {
 		newResource.setRestaurantId(actor.getChosenRestaurantId());
 		resourcesService.createResource(newResource);
-		ApplicationURL.redirect(ApplicationURL.RESOURCES + ApplicationURL.RELOAD);
+		ApplicationURL.redirect(ApplicationURL.RESOURCES);
 	}
 	
 	private void initResources() {

@@ -24,7 +24,7 @@ public class Resource {
 
 	@Id
 	@GeneratedValue(generator = "ResourceSequence")
-	private int id;
+	private Integer id;
 	
 	private String name;
 	
@@ -39,11 +39,17 @@ public class Resource {
 	@Column(name="RESTAURANT_ID")
 	private int restaurantId;
 
-	public int getId() {
+	@Column(name="MINIMAL_AMOUNT_IN_PRODUCT")
+	private double minimalAmountInProduct;
+	
+	@Column(name="CRITICAL_AMOUNT_IN_STORE")
+	private double criticalAmountInStore;
+	
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -85,5 +91,21 @@ public class Resource {
 
 	public void setRestaurantId(int restaurantId) {
 		this.restaurantId = restaurantId;
+	}
+
+	public double getMinimalAmountInProduct() {
+		return minimalAmountInProduct;
+	}
+
+	public double getCriticalAmountInStore() {
+		return criticalAmountInStore;
+	}
+
+	public void setMinimalAmountInProduct(double minimalAmountInProduct) {
+		this.minimalAmountInProduct = minimalAmountInProduct;
+	}
+
+	public void setCriticalAmountInStore(double criticalAmountInStore) {
+		this.criticalAmountInStore = criticalAmountInStore;
 	}
 }

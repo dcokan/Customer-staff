@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import pwr.itApp.customerStaff.presentation.components.ElementsList;
 import pwr.itApp.customerStaff.presentation.dto.UserDTO;
 import pwr.itApp.customerStaff.service.UserService;
-import pwr.itApp.customerStaff.webapp.ApplicationURL;
 import pwr.itApp.customerStaff.webapp.login.Actor;
 
 @Component("employeePage")
@@ -19,12 +18,13 @@ public class EmployeePageBean implements ElementsList<UserDTO>, Serializable{
 	private static final long serialVersionUID = -2525555346910993483L;
 	private List<UserDTO> userList;
 	private UserDTO selectedUser;
-
+	private boolean newEmployeeMode;
+	
 	@Autowired
 	private UserService userService;
 	@Autowired
 	private Actor actor;
-
+	
 	
 	@Override
 	public List<UserDTO> getValueList() {
@@ -37,11 +37,12 @@ public class EmployeePageBean implements ElementsList<UserDTO>, Serializable{
 
 	@Override
 	public void onNewItemButton() {
-		ApplicationURL.redirect(ApplicationURL.NEW_EMPLOYEE + ApplicationURL.RELOAD);
+		newEmployeeMode = true;
 	}
 
 	@Override
 	public void onDeailShowButton(UserDTO user) {
+		newEmployeeMode = false;
 		selectedUser = user;
 	}
 	
@@ -55,6 +56,14 @@ public class EmployeePageBean implements ElementsList<UserDTO>, Serializable{
 
 	public void setSelectedUser(UserDTO selectedUser) {
 		this.selectedUser = selectedUser;
+	}
+
+	public boolean isNewEmployeeMode() {
+		return newEmployeeMode;
+	}
+
+	public void setNewEmployeeMode(boolean newEmployeeMode) {
+		this.newEmployeeMode = newEmployeeMode;
 	}
 	
 	

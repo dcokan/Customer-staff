@@ -10,17 +10,19 @@
 	<p:outputLabel value="Products's details" styleClass="centralLabel"/>
 	<p:spacer />
 	<h:panelGrid columns="1" styleClass="centralTable">
-			<h:outputLabel value="Product Name: #{resourcesBean.selectedResource.name}"/>
+			<h:outputLabel value="Product Name: #{productBean.selectedProduct.name}"/>
 		
-			<h:outputLabel value="Minimal amount in product: #{resourcesBean.selectedResource.minimalAmount}"/>
+			<h:outputLabel value="Price: #{productBean.selectedProduct.price}"/>
 
-			<h:outputLabel value="Critical amount: #{resourcesBean.selectedResource.criticalAmount}"/>
+			<h:outputLabel value="Description: #{productBean.selectedProduct.productDescription}"/>
 
-			<h:outputLabel value="#{resourcesBean.priceLabel}: #{resourcesBean.selectedResource.price}"/>
+			<h:outputLabel value="Only for adult: #{productBean.selectedProduct.adultOnly ? 'Yes' : 'No'} "/>
 
-			<h:outputLabel value="Storage amount: #{resourcesBean.selectedResource.amount}"/>
+			<h:outputLabel value="Product type: #{productBean.selectedProduct.productType}"/>
 			
-			<h:commandButton action="#{resourcesBean.onEditResource}" value="Edit"/>
+			<h:outputLabel value="Is available: #{productBean.selectedProduct.available}"/>
+			
+			<h:commandButton action="#{productBean.onEditProduct}" value="Edit"/>
 	</h:panelGrid>
 	</h:form>
 </html>

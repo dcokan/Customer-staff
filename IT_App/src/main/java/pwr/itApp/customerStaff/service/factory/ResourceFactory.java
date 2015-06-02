@@ -1,13 +1,11 @@
 package pwr.itApp.customerStaff.service.factory;
 
-import oracle.net.aso.e;
-
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import pwr.itApp.customerStaff.domain.Resource;
 import pwr.itApp.customerStaff.presentation.dto.ResourceDTO;
 
-@Repository
+@Service
 public class ResourceFactory extends AbstractFactoryDTO<Resource, ResourceDTO> {
 
 	@Override
@@ -19,6 +17,9 @@ public class ResourceFactory extends AbstractFactoryDTO<Resource, ResourceDTO> {
 		dto.setName(entity.getName());
 		dto.setPrice(entity.getPrice());
 		dto.setRestaurantId(entity.getRestaurantId());
+		dto.setMinimalAmount(entity.getMinimalAmountInProduct());
+		dto.setCriticalAmount(entity.getCriticalAmountInStore());
+		
 		return dto;
 	}
 
@@ -32,6 +33,8 @@ public class ResourceFactory extends AbstractFactoryDTO<Resource, ResourceDTO> {
 		entity.setName(dto.getName());
 		entity.setPrice(dto.getPrice());
 		entity.setRestaurantId(dto.getRestaurantId());
+		entity.setCriticalAmountInStore(dto.getCriticalAmount());
+		entity.setMinimalAmountInProduct(dto.getMinimalAmount());
 		
 		return entity;
 	}

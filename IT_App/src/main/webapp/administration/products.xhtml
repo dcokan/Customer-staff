@@ -10,8 +10,9 @@
 
     <ui:define name="east-content">
 	<h:form>
-    	<p:tabView value="#{productBean.productsViewData}" var="item" activeIndex="#{productBean.activeTabIndex}">
-    		<p:ajax event="tabChange" listener="#{productBean.onTabChange}"/>
+    	<p:tabView value="#{productBean.productsViewData}" styleClass="productTabs"
+    		 var="item" activeIndex="#{productBean.activeTabIndex}">
+    		<p:ajax event="tabChange" listener="#{productBean.onTabChange}" update=":#{p:component('centerContent')}"/>
 	    	<p:tab title="#{item.title}">
 			  	<custom:elemntsList valueList="#{item.productList}" showEmpty="true" emptyName="New Product"
 			   		emptyImageURL="#{item.imageURL}" emptyDescription="#{item.emptyDesc}"
@@ -23,11 +24,12 @@
     
     <ui:define name="center-content">
     	<h:form id="centerContent">
-	    	<h:panelGroup id="productDetails" rendered="#{productBean.productSelected}" layout="block">
+	    	<h:panelGroup id="productDetails" rendered="#{productBean.productSelected and !productBean.editProductMode}" layout="block">
 	    		<ui:include src="products/detailsPanel.xhtml"/>
 	    	</h:panelGroup>
 	    	
-	    	<h:panelGroup id="newProductBlk"  rendered="#{productBean.newProductMode}" layout="block">
+	    	<h:panelGroup id="newProductBlk"  rendered="#{productBean.newProductMode or productBean.editProductMode}"
+	    		 layout="block">
 	    		<ui:include src="products/newProducts.xhtml"/>
 	    	</h:panelGroup>
     	</h:form>

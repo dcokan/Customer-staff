@@ -19,14 +19,4 @@ public class ResourceDAO extends GenericDAO<Resource>{
 				.setParameter("restaurantId", restId)
 				.getResultList();
 	}
-
-	@Transactional
-	public void persistNewEntry(Resource resource) {
-		em.persist(resource);
-	}
-
-	@Transactional
-	public void updateResouerce(Resource resource) {
-		em.merge(resource);
-	}
 }

@@ -9,7 +9,7 @@ import pwr.itApp.customerStaff.persistance.ResourceDAO;
 import pwr.itApp.customerStaff.presentation.dto.ResourceDTO;
 import pwr.itApp.customerStaff.service.factory.ResourceFactory;
 
-@Service
+@Service("resourceService")
 public class ResourcesService {
 
 	@Autowired

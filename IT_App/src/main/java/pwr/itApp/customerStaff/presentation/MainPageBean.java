@@ -52,10 +52,19 @@ public class MainPageBean implements ElementsList<RestaurantDTO>, Serializable {
 		return actor.getUser() != null;
 	}
 	
+	public void onAccountCreate() {
+		ApplicationURL.redirect(ApplicationURL.REGISTER);
+	}
+	
+	public void onPasswordReminder() {
+		//TODO: Reminder is not available at the moment
+		ApplicationURL.redirect(ApplicationURL.MAIN_PAGE);
+	}
+	
 	public void loginAction() {
 		if (actorActions.authenticate(loginForm.getLoginUsername(), 
 				loginForm.getPassword())) {
-			ApplicationURL.redirect(ApplicationURL.EMPLOYEERS+ApplicationURL.RELOAD);
+			ApplicationURL.redirect(ApplicationURL.EMPLOYEERS);
 		} else {
 			return;
 		}
@@ -81,11 +90,11 @@ public class MainPageBean implements ElementsList<RestaurantDTO>, Serializable {
 	public void onLogout() {
 		log.info("User (" + actor.getUser().getId() + ") logs out" );
 		actor.logoutUser();
-		ApplicationURL.redirect(ApplicationURL.MAIN_PAGE + ApplicationURL.RELOAD);
+		ApplicationURL.redirect(ApplicationURL.MAIN_PAGE);
 	}
 	
 	public void onAdminTabChange() {
-		ApplicationURL.redirect(selectedTab.getEntryURL());
+		ApplicationURL.redirect(selectedTab.getEntryURL(), false);
 	}
 
 	public TabMenu getSelectedTab() {

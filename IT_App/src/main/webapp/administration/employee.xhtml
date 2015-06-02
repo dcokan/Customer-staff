@@ -10,16 +10,20 @@
 		<h:form>
 	    	<custom:elemntsList beanName="#{employeePage}" showEmpty="true" emptyName="New User"
 	    		emptyImageURL="images/employee.png" emptyDescription="Create and define new user"
-	    		detailArea=":#{p:component('employeeDetails')}"/>
+	    		detailArea=":#{p:component('centerContent')}"/>
     	</h:form>
 	</ui:define>
 	
 	<ui:define name="center-content">
-	<h:panelGroup id="employeeDetails" >
-		<h:panelGroup rendered="#{employeePage.userSelected}">
-			<h:outputText value ="#{employeePage.selectedUser.name}"/>
-		</h:panelGroup>
-	</h:panelGroup>
+		<h:form id="centerContent">
+			<h:panelGroup rendered="#{employeePage.userSelected}">
+				<h:outputText value ="#{employeePage.selectedUser.name}"/>
+			</h:panelGroup>
+			
+			<h:panelGroup id="newEmployeeBlk" layout="block" rendered="#{employeePage.newEmployeeMode}">
+				<ui:include src="employee/newEmployee.xhtml"/>
+			</h:panelGroup>
+		</h:form>
 	</ui:define>
 </ui:composition>
 </html>

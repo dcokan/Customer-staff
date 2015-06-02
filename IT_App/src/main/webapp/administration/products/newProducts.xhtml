@@ -6,40 +6,71 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:custom="http://java.sun.com/jsf/composite/components">
 	<h:form>
-	
 	<p:outputLabel value="New product" styleClass="centralLabel"/>
 	<p:spacer />
+	<p:messages id="messages" showDetail="true" autoUpdate="true" />
+	
+	<h:outputScript>
+		$(window).load(function(){
+            $('#slder').slider({
+                   step: 0.1
+                  });
+        });
+	</h:outputScript>
 	<h:panelGrid id="newProductBlk" columns="2" styleClass="centralTable" >
 			<h:outputLabel value="Product Name:" for="nameInput" />
-			<p:inputText id="nameInput" required="true" 
+			<p:inputText id="nameInput" required="false" 
 				value="#{productBean.newProduct.name}"/>
 				
 			<h:outputLabel value="Price:" for="priceInput"/>		
 			<p:inputText id="priceInput" value="#{productBean.newProduct.price}"
-				required="true"/>
+				required="false"/>
 			
 			<h:outputLabel value="Product description:" for="descriptionInput" />
 			<p:inputTextarea id="descriptionInput" rows="5" cols="50" maxlength="200" value="#{productBean.newProduct.productDescription}"/>
 	</h:panelGrid >
+	
 	<h:panelGroup id="productRecipeBlk" layout="block" >
-        <p:outputLabel for="resourcesList" value="Chose resource:" />
-        <p:selectOneListbox id="resourcesList" value="#{productBean.resourceToBeAdded}" converter="resourceConverter">
-			<f:selectItems value="#{productBean.resourcesFromRestaurant}" var="var" itemLabel="#{var.name}" itemValue="#{var}"/>
-        </p:selectOneListbox>
+
+		<h:panelGroup id="subRecipe" styleClass="someCl" layout="block"> 
+			<h:panelGroup style="display: inline-block;" layout="block" styleClass="listboxItem">
+		        <p:outputLabel for="resourcesList" value="Chose resource:" />
+		        <p:selectOneListbox id="resourcesList" value="#{productBean.resourceToBeAdded}" converter="#{resourceConverter}">
+					<f:ajax listener="#{productBean.onResourceSelected}" event="change" render="resourceAmountInputBlk" execute="@this"></f:ajax>
+					<f:selectItems value="#{productBean.resourcesFromRestaurant}" var="var" itemLabel="#{var.name}" itemValue="#{var}"/>
+		        </p:selectOneListbox>
+	        </h:panelGroup>
+	        
+			<h:panelGroup id="resourceAmountInputBlk" style="display: inline-block;" layout="block">
+		        <h:panelGrid columns="1">
+		        	<p:spinner id="resourceAmountInput" stepFactor="#{productBean.resourceToBeAdded.minimalAmount}" min="0" 
+		        		max="#{productBean.resourceToBeAdded.minimalAmount*100}" value="#{productBean.resourceAmount}"/>
+		        	
+		        	<h:commandButton id="addResourceBtn" value=">>" action="#{productBean.onResourceAdded}" 
+		        		disabled="#{empty productBean.resourceToBeAdded}">
+		        		<f:ajax render=":#{p:component('addedResources')}" execute="resourceAmountInput"/>
+		        	</h:commandButton>
+		        </h:panelGrid>
+	        </h:panelGroup>
+	        
+			<h:panelGroup style="display: inline-block;" layout="block" styleClass="listboxItem">
+		        <p:outputLabel for="addedResources" value="Selected resources:"/>
+		        <p:selectOneListbox id="addedResources" >
+		        	<f:selectItems value="#{productBean.resourcesInProduct}" var="var" itemLabel="#{var}" itemValue="#{var}"/>
+		        </p:selectOneListbox>
+	        </h:panelGroup>
+        </h:panelGroup>
         
-        <h:panelGrid columns="1">
-        	<p:inputText id="resourceAmountInput" value="#{productBean.resourceAmount}" />
-        	<p:slider for="resourceAmountInput" type="vertical"/>
-        	<h:commandButton id="addResourceBtn" value=">>" action="#{productBean.onResourceAdded}">
-        		<f:ajax render=":#{p:component('addedResources')}"/>
-        	</h:commandButton>
-        </h:panelGrid>
-        
-        <p:outputLabel for="addedResources" value="Selected resources:"/>
-        <p:selectOneListbox id="addedResources" disabled="true" converter="resourceConverter">
-        	<f:selectItems value="#{productBean.resourcesInProduct}" var="var" itemLabel="#{var.name}" itemValue="#{var}"/>
-        </p:selectOneListbox>
+        <h:panelGroup layout="block" styleClass="centralDiv">
+			<h:commandButton id="newProductBtn" value="Create product" styleClass="centralButton"   
+						action="#{productBean.onNewProduct}" type="submit" rendered="#{productBean.newProductMode}">
+					<f:ajax execute="@form" render="@form" />
+			</h:commandButton>
+			<h:commandButton id="updateProductBtn" value="Update product" styleClass="centralButton"   
+						action="#{productBean.onProductUpdate}" type="submit" rendered="#{productBean.editProductMode}">
+					<f:ajax execute="@form" render="@form" />
+			</h:commandButton>
+		</h:panelGroup>
     </h:panelGroup>
- 
-	</h:form>
+    </h:form>
 </html>
