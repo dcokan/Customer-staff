@@ -163,9 +163,27 @@ public class ResourcesBean implements ElementsList<ResourceDTO>, Serializable{
 		//TODO: It should return shomething like:
 		// "price for 1 ml"
 		// However if user set minimal amount lowet then sjhould be this used
-		return "TEMP";
+		return "Price for " + getFormattedMinAmount();
 	}
 	
+	private String getFormattedMinAmount() {
+		String suffix = "";
+		String res = "" + newResource.getMinimalAmount();
+		switch (newResource.getResourceType()) {
+		case LIQUID: {
+			suffix = " l"; break;
+		}
+		case PIECE: {
+			suffix = " piece"; break;
+		}
+		case WEIGHT: {
+			suffix = " kg"; break;
+		}
+		}
+		
+		return res + suffix;
+	}
+
 	public Actor getActor() {
 		return actor;
 	}

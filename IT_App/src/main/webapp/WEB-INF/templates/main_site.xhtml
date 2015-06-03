@@ -38,7 +38,7 @@
 			       	 	<h:panelGrid columns="2" columnClasses="wideColumn" styleClass="wholeLineTable">
 				        	<h:panelGroup layout="block" styleClass="mainBanner_left">
 				                <p:selectOneButton value="#{mainPage.selectedTab}" styleClass="adminMenu" >
-									<f:selectItems value="#{mainPage.adminTabs}" var="var" itemLabel="#{var.nameKey}" 
+									<f:selectItems value="#{mainPage.adminTabs}" var="var" itemLabel="#{rb[var.nameKey]}" 
 										itemValue="#{var}"/>
 									<p:ajax listener="#{mainPage.onAdminTabChange}"/>
 						        </p:selectOneButton>

@@ -1,17 +1,11 @@
 package pwr.itApp.customerStaff.presentation.dto;
 
-import java.text.MessageFormat;
-
-import javax.faces.context.FacesContext;
-
 import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.jboss.logging.Logger;
 
 import pwr.itApp.customerStaff.domain.Restaurant;
 import pwr.itApp.customerStaff.domain.enums.EmplType;
 import pwr.itApp.customerStaff.presentation.components.ElementComponent;
-import pwr.itApp.customerStaff.webapp.ResourceBundle;
-import pwr.itApp.customerStaff.webapp.TextResourceKeys;
 
 public class UserDTO implements ElementComponent{
 	Logger log = LoggerFactory.logger(getClass());
@@ -48,8 +42,9 @@ public class UserDTO implements ElementComponent{
 //		// {0} is a {1}
 //		// for example:
 //		// Dawid Cokan is a waiter
-//		return MessageFormat.format(mockRB.getString(TextResourceKeys.EMPLOYEE_DESC), 
-//				 getName(), mockRB.getString(emplType.getNameKey()));
+//		ResourceBundle rb = new MessageProvider().getBundle();
+//		return MessageFormat.format(rb.getString(TextResourceKeys.EMPLOYEE_DESC), 
+//				 getName(), rb.getString(emplType.getNameKey()));
 	}
 
 	@Override

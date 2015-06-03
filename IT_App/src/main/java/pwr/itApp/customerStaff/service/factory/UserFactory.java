@@ -2,20 +2,18 @@ package pwr.itApp.customerStaff.service.factory;
 
 import java.text.MessageFormat;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 import pwr.itApp.customerStaff.domain.User;
 import pwr.itApp.customerStaff.presentation.dto.UserDTO;
-import pwr.itApp.customerStaff.webapp.ResourceBundle;
-import pwr.itApp.customerStaff.webapp.TextResourceKeys;
 
 @Service
 public class UserFactory extends AbstractFactoryDTO<User, UserDTO>{
 
-	@Autowired
-	private ResourceBundle rb;
+//	@Autowired
+//	private ResourceBundle rb;
+
 	
 	@Override
 	public UserDTO getDTO(User entity) {
@@ -30,8 +28,8 @@ public class UserFactory extends AbstractFactoryDTO<User, UserDTO>{
 //		userDTO.setRestaurant(entity.getRestaurants().g);
 		userDTO.setTel(entity.getTel());
 		
-		userDTO.setDescription(MessageFormat.format(rb.getString(TextResourceKeys.EMPLOYEE_DESC), 
-				 userDTO.getName(), rb.getString(userDTO.getEmplType().getNameKey())));
+		userDTO.setDescription(MessageFormat.format("{0} is a {1}", 
+				 userDTO.getName(), userDTO.getEmplType().getName()));
 		
 		return userDTO;
 	}

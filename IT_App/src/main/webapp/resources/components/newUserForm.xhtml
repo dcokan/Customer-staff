@@ -28,7 +28,7 @@
 			<p:selectOneMenu id="emplTypeInput" value="#{newUser.user.emplType}"
 				required="true">
 				<f:selectItem label="" value="#{null}"/>
-				<f:selectItems value="#{newUser.emplTypes}" var="var" itemLabel="#{var.nameKey}"/>
+				<f:selectItems value="#{newUser.emplTypes}" var="var" itemLabel="#{rb[var.nameKey]}"/>
 			</p:selectOneMenu>
 				
 			<p:spacer height="30" />

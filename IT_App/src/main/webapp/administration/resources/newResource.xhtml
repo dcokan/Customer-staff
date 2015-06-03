@@ -18,7 +18,7 @@
 			<p:selectOneMenu id="measureUnitInput" value="#{resourcesBean.newResource.measureUnit}"
 				required="true">
 				<f:selectItem label=" " value="#{null}"/>
-				<f:selectItems value="#{resourcesBean.measureUnits}" var="var" itemLabel="#{var.nameKey}"/>
+				<f:selectItems value="#{resourcesBean.measureUnits}" var="var" itemLabel="#{rb[var.nameKey]}"/>
 			</p:selectOneMenu>
 		
 <!-- 			<h:outputLabel value="Minimal amount in product" for="minAmountInput" /> -->
@@ -48,7 +48,7 @@
 			        
 					<h:commandButton id="confirmBtn" value="Save" styleClass="centralButton"   
 							action="#{resourcesBean.onNewMinimalAmountConfirm}" type="submit">
-						<f:ajax execute="newMinimalAmountInput" render="minimalAmountBlk" />
+						<f:ajax execute="newMinimalAmountInput" render="minimalAmountBlk priceLabel" />
 					</h:commandButton>
 		    	</p:panel>
 		    </h:panelGroup>

@@ -5,14 +5,12 @@ import java.io.Serializable;
 
 import javax.faces.context.FacesContext;
 
-import pwr.itApp.customerStaff.presentation.dto.ResourceDTO;
-
 
 public class ApplicationURL {
 
 	private ApplicationURL() {}
 
-	public static final String RELOAD = "?faces-redirect=true";
+	private static final String RELOAD = "?faces-redirect=true";
 	
 	public static final String MAIN_PAGE = "/public/index.jsf";
 	public static final String REGISTER = "/public/register.jsf";

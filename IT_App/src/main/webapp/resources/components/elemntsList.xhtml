@@ -35,8 +35,7 @@
 	                <p:graphicImage name="#{item.imageURL}" width="100" hight="100"/>
 	                <h:outputText styleClass="word-prewrap" value="#{item.description}"></h:outputText>
 	                <h:panelGroup>
-		                <h:outputText styleClass="word-prewrap" value="#{item.description}"></h:outputText>
-		                <h:commandLink value="showDetails" action="#{cc.attrs.beanName.onDeailShowButton(item)}">
+		                <h:commandLink value="Show Details" action="#{cc.attrs.beanName.onDeailShowButton(item)}">
 		                	<p:ajax update="#{cc.attrs.detailArea}"/>
 		                </h:commandLink>
 	                </h:panelGroup>

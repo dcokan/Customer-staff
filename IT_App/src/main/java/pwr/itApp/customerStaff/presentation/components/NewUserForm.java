@@ -3,25 +3,21 @@ package pwr.itApp.customerStaff.presentation.components;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.RequestScoped;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import pwr.itApp.customerStaff.domain.enums.EmplType;
 import pwr.itApp.customerStaff.presentation.dto.UserDTO;
-import pwr.itApp.customerStaff.webapp.ResourceBundle;
 
 @Component("newUser")
 @RequestScoped
 public class NewUserForm {
-	@Autowired
-	private ResourceBundle rb;
 	
 	private UserDTO user;
 
 	
 	@PostConstruct
 	public void init() {
-		user = new UserDTO();
+		cleanData();
 	}
 	
 	public UserDTO getUser() {
@@ -46,6 +42,10 @@ public class NewUserForm {
 		}
 		
 		return allEnums;
+	}
+
+	public void cleanData() {
+		user = new UserDTO();
 	}
 	
 }

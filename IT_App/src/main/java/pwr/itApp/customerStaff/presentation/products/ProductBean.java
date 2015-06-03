@@ -22,7 +22,6 @@ import pwr.itApp.customerStaff.service.ProductService;
 import pwr.itApp.customerStaff.service.ResourcesService;
 import pwr.itApp.customerStaff.service.RestaurantService;
 import pwr.itApp.customerStaff.webapp.ApplicationURL;
-import pwr.itApp.customerStaff.webapp.ResourceBundle;
 import pwr.itApp.customerStaff.webapp.login.Actor;
 import pwr.itApp.customerStaff.webapp.utils.LabelUtils;
 
@@ -48,9 +47,10 @@ public class ProductBean implements Serializable, ElementsList<ProductDTO>{
 	
 	@Autowired
 	private Actor actor;
+
+//	@Autowired
+//	private ResourceBundle rb;
 	
-	@Autowired
-	private ResourceBundle rb;
 	
 	private int activeTabIndex;
 	private ProductDTO newProduct;
@@ -87,7 +87,7 @@ public class ProductBean implements Serializable, ElementsList<ProductDTO>{
 			productData.setProductList(restaurantService.getProductsByType(actor.getChosenRestaurant(), type));
 			productData.setEmptyDescription(getFormattedEmptyDesc(type));
 			productData.setImageURL(type.getImageURL());
-			productData.setTitle(rb.getString(type.getNameKey()));
+			productData.setTitle(type.getName());
 			tabs.add(productData);
 		}
 	}

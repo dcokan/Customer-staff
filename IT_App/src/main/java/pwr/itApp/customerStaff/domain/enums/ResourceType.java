@@ -20,4 +20,22 @@ public enum ResourceType implements Serializable{
 	public void setNameKey(String nameKey) {
 		this.nameKey = nameKey;
 	}
+
+	public static Double getMinimalAmount(ResourceType resourceType) {
+		if (resourceType == null) {
+			return null;
+		}
+		switch (resourceType) {
+		case LIQUID: {
+			return 0.01;
+		}
+		case PIECE: {
+			return 1.0;
+		}
+		case WEIGHT: {
+			return 0.01;
+		}
+		}
+		return null;
+	}
 }

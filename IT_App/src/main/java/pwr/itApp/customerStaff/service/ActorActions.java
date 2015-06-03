@@ -3,9 +3,11 @@ package pwr.itApp.customerStaff.service;
 import static pwr.itApp.customerStaff.webapp.TextResourceKeys.USER_NOT_FOUND_MSG;
 import static pwr.itApp.customerStaff.webapp.TextResourceKeys.WRONG_PASS_MSG;
 
+import java.util.ResourceBundle;
+
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,28 +15,29 @@ import org.springframework.util.DigestUtils;
 
 import pwr.itApp.customerStaff.domain.User;
 import pwr.itApp.customerStaff.persistance.UserDAO;
-import pwr.itApp.customerStaff.webapp.ApplicationURL;
-import pwr.itApp.customerStaff.webapp.ResourceBundle;
 import pwr.itApp.customerStaff.webapp.login.Actor;
 
 @Service
+@RequestScoped
 public class ActorActions {
 
 	@Autowired
 	private UserDAO userDAO;
 	@Autowired
 	private Actor actor;
-	@Autowired
-	private ResourceBundle rb;
+	
+//	@Autowired
+//	private ResourceBundle rb;
+
 	
 	public boolean authenticate(String login, String pass) {
 		User userByLogin = userDAO.findUserByLogin(login);
 		
 		if (userByLogin == null) {
-			addMessage(rb.getString(USER_NOT_FOUND_MSG));
+//			addMessage(rb.getString(USER_NOT_FOUND_MSG));
 			return false;
 		} else if (!validUserPassword(userByLogin, pass)) {
-			addMessage(rb.getString(WRONG_PASS_MSG));
+//			addMessage(rb.getString(WRONG_PASS_MSG));
 			return false;
 		} else {
 			actor.afterAuthentication(userByLogin);

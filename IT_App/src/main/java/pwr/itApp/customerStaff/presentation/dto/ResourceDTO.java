@@ -98,6 +98,7 @@ public class ResourceDTO implements ElementComponent, Serializable{
 
 	public void setResourceType(ResourceType resourceType) {
 		this.resourceType = resourceType;
+		minimalAmount = ResourceType.getMinimalAmount(resourceType);
 	}
 
 	public int getRestaurantId() {

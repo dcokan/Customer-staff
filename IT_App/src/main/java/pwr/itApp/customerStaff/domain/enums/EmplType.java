@@ -2,18 +2,20 @@ package pwr.itApp.customerStaff.domain.enums;
 
 public enum EmplType implements EnumWithId{
 
-	OWNER ("O", "emplType.owner"),
-	WAITER ("W", "emplType.waiter"),
-	BARMAN ("B", "emplType.barman"),
-	COOKER ("C", "emplType.cooker"),
-	CUSTOMER ("R", "emplType.customer");
+	OWNER ("O", "emplType.owner", "Owner"),
+	WAITER ("W", "emplType.waiter", "Waiter"),
+	BARMAN ("B", "emplType.barman", "Barman"),
+	COOKER ("C", "emplType.cooker", "Cooker"),
+	CUSTOMER ("R", "emplType.customer", "Customer");
 	
 	private String key;
 	private String nameKey;
+	private String name;
 	
-	private EmplType(String key, String nameKey) {
+	private EmplType(String key, String nameKey, String name) {
 		this.key = key;
 		this.nameKey = nameKey;
+		this.name = name;
 	}
 
 	@Override
@@ -33,5 +35,9 @@ public enum EmplType implements EnumWithId{
 		}
 		
 		return null;
+	}
+
+	public String getName() {
+		return name;
 	}
 }

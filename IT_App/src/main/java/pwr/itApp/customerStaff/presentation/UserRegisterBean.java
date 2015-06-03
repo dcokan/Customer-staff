@@ -1,7 +1,9 @@
 package pwr.itApp.customerStaff.presentation;
 
 import java.io.Serializable;
+import java.util.ResourceBundle;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
@@ -16,7 +18,7 @@ import pwr.itApp.customerStaff.presentation.components.NewUserForm;
 import pwr.itApp.customerStaff.presentation.dto.UserDTO;
 import pwr.itApp.customerStaff.service.UserService;
 import pwr.itApp.customerStaff.webapp.ApplicationURL;
-import pwr.itApp.customerStaff.webapp.ResourceBundle;
+import pwr.itApp.customerStaff.webapp.MessageProvider;
 import pwr.itApp.customerStaff.webapp.TextResourceKeys;
 import pwr.itApp.customerStaff.webapp.login.Actor;
 
@@ -36,25 +38,25 @@ public class UserRegisterBean implements Serializable {
 	@Autowired
 	private NewUserForm userForm;
 	
-	@Autowired
-	private ResourceBundle rb;
-
+//	@Autowired
+//	private ResourceBundle rb;
+	
 	private String activationCode;
 	private String activationMail;
 	
 
-	private String createNewUser(UserDTO user) {
+	private void createNewUser(UserDTO user) {
 		if (!validData(user)) {
-			return null;
+			return ;
 		}
 		prepareAccountForUser(user);
 		userService.createUser(user);
-		return ApplicationURL.MAIN_PAGE + ApplicationURL.RELOAD;
+		ApplicationURL.redirect(ApplicationURL.EMPLOYEERS);
 	}
 	
-	private String createNewUser(EmplType emplType, UserDTO user) {
+	private void createNewUser(EmplType emplType, UserDTO user) {
 		user.setEmplType(emplType);
-		return createNewUser(user);
+		createNewUser(user);
 	}
 
 	private void prepareAccountForUser( UserDTO user) {
@@ -76,27 +78,27 @@ public class UserRegisterBean implements Serializable {
 		}
 	}
 
-	public String onNewManagerAccountRegistry() {
+	public void onNewManagerAccountRegistry() {
 		log.info("New manager user button clicked");
-		return createNewUser(EmplType.OWNER, userForm.getUser());
+		createNewUser(EmplType.OWNER, userForm.getUser());
 	}
 
-	public String onNewAccountRegistry() {
+	public void onNewAccountRegistry() {
 		log.info("New user button clicked");
 		
-		return createNewUser(EmplType.CUSTOMER, userForm.getUser());
+		createNewUser(EmplType.CUSTOMER, userForm.getUser());
 	}
 	
-	public String onNewEmployeeCreated() {
+	public void onNewEmployeeCreated() {
 		log.info("New employee button clicked");
 		
-		return createNewUser(userForm.getUser());
-				
+		createNewUser(userForm.getUser());
+		userForm.cleanData();
 	}
 	
 	private boolean validData(UserDTO user) {
 		if (!userService.isUniqueUserName(user.getLogin())) {
-			addMessage(rb.getString(TextResourceKeys.DUPLICATED_LOGIN));
+//			addMessage(rb.getString(TextResourceKeys.DUPLICATED_LOGIN));
 			return false;
 		}
 		
